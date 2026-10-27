@@ -3,8 +3,10 @@
 Portofolio pribadi bilingual (Indonesia / English) dengan fokus data & AI.
 Dibangun dengan Next.js 16 App Router, Tailwind CSS v4, dan next-intl.
 
-> Status: fondasi siap (i18n, tema, layout dasar). Section konten dan halaman
-> detail project menyusul. Lihat [`docs/04-roadmap.md`](./docs/04-roadmap.md).
+> Status: fondasi siap (i18n, tema, layout dasar), arah visual terkunci —
+> **A · Editorial Oxblood** (`design/style-tiles/a-editorial.html`). Section
+> konten dan halaman detail project menyusul. Lihat
+> [`docs/04-roadmap.md`](./docs/04-roadmap.md).
 
 ---
 
@@ -74,6 +76,10 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 | [`docs/03-content-model.md`](./docs/03-content-model.md) | Tipe konten & schema Zod                 |
 | [`docs/04-roadmap.md`](./docs/04-roadmap.md)             | Fase pengerjaan & definition of done     |
 | [`docs/05-references.md`](./docs/05-references.md)       | Analisis referensi & spek style tile     |
+
+Style tile eksplorasi ada di `design/style-tiles/` (HTML mandiri, tidak ikut
+build). Arah terpilih: `a-editorial.html`; `b-quiet.html` dan `c-technical.html`
+disimpan sebagai arsip.
 
 ## Lisensi
 

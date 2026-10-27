@@ -95,13 +95,15 @@ monokrom, sangat craft-oriented.
 
 ---
 
-## Rencana style tile
+## Style tile (final)
 
 Tiga file HTML mandiri di `design/style-tiles/`, tidak ikut build Next.js.
 Semua memakai palet oxblood yang sama; yang dibandingkan adalah tipografi,
 kepadatan, dan karakter.
 
-### A — Editorial Oxblood
+**Arah terpilih: A — Editorial Oxblood.** B dan C disimpan sebagai arsip.
+
+### A — Editorial Oxblood ✅ dipilih
 
 - Paling dekat dengan referensi.
 - Display `clamp(3.25rem, 7.5vw, 6rem)`, Instrument Serif italic di kata terakhir.
@@ -110,7 +112,7 @@ kepadatan, dan karakter.
 - Banyak kontras ukuran; section label mono.
 - Kesan: berani, artistik, berkarakter.
 
-### B — Quiet Luxury
+### B — Quiet Luxury (arsip)
 
 - Display lebih kecil (`~4rem`), whitespace lebih lega.
 - Heading section memakai serif (Instrument Serif) untuk semua H2.
@@ -118,7 +120,7 @@ kepadatan, dan karakter.
 - Noise sangat halus (`.08`).
 - Kesan: tenang, senior, premium.
 
-### C — Warm Technical
+### C — Warm Technical (arsip)
 
 - Label mono lebih dominan, grid samar di background.
 - Hero window bergaya terminal/browser dengan readout data.
@@ -138,13 +140,13 @@ kepadatan, dan karakter.
 - Light/dark toggle
 - Responsive
 
-### Kriteria penilaian
+### Kriteria penilaian (dipakai saat memilih A)
 
-1. Apakah hero langsung terasa “ini saya”?
-2. Apakah nyaman dibaca untuk konten panjang?
-3. Apakah dark mode sama kuatnya dengan light?
-4. Apakah terasa dibuat manusia, bukan template?
-5. Apakah masih cocok untuk recruiter konservatif?
+1. Apakah hero langsung terasa “ini saya”? → A paling kuat, window dominan.
+2. Apakah nyaman dibaca untuk konten panjang? → A menjaga isi di ivory.
+3. Apakah dark mode sama kuatnya dengan light? → A lolos, maroon tetap jadi aksen.
+4. Apakah terasa dibuat manusia, bukan template? → serif italic + label mono.
+5. Apakah masih cocok untuk recruiter konservatif? → palet oxblood tetap tenang.
 
 ---
 

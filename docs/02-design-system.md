@@ -2,6 +2,10 @@
 
 ## Arah: “Oxblood Editorial”
 
+Arah final: **A — Editorial Oxblood** (dipilih dari 3 style tile di
+`design/style-tiles/`; B dan C diarsipkan). Spesifikasi di bawah adalah kontrak
+implementasi untuk tile A.
+
 Portofolio yang terasa seperti majalah digital: tipografi besar, ruang lega,
 detail craft kecil, dan satu warna identitas yang kuat. Referensi utama
 [Perry Wang](https://perryw-2023.webflow.io/), diadaptasi ke palet oxblood

@@ -38,18 +38,21 @@ sebelum lanjut.
 
 ---
 
-## Fase 2 — Style tiles & keputusan visual
+## Fase 2 — Style tiles & keputusan visual ✅
 
-- [ ] Buat `design/style-tiles/a-editorial.html`
-- [ ] Buat `design/style-tiles/b-quiet.html`
-- [ ] Buat `design/style-tiles/c-technical.html`
-- [ ] Tiap tile: navbar, hero browser window, satu project card, satu baris
+- [x] Buat `design/style-tiles/a-editorial.html`
+- [x] Buat `design/style-tiles/b-quiet.html`
+- [x] Buat `design/style-tiles/c-technical.html`
+- [x] Tiap tile: navbar, hero browser window, satu project card, satu baris
       experience, badge stack, footer, toggle light/dark
-- [ ] Buka di browser desktop + mobile, bandingkan
-- [ ] Pilih satu arah, catat revisi
-- [ ] Finalisasi token warna & tipografi
+- [x] Buka di browser desktop + mobile, bandingkan
+- [x] Pilih satu arah, catat revisi
+- [x] Finalisasi token warna & tipografi
 
 **Selesai jika:** satu arah dipilih dan daftar revisi disetujui.
+→ Arah dipilih: **A — Editorial Oxblood**. Tile B dan C disimpan sebagai arsip
+di `design/style-tiles/`, tidak dipakai. Token warna & tipografi di
+`docs/02-design-system.md` sudah sesuai tile A, jadi tidak ada perubahan token.
 
 ---
 
@@ -152,8 +155,9 @@ tidak ada broken link.
 | --------------- | ------------------------------------------- |
 | 0 — Perencanaan | ✅ selesai                                  |
 | 1 — Scaffold    | ✅ selesai                                  |
-| 2 — Style tiles | ⏳ berikutnya                               |
+| 2 — Style tiles | ✅ selesai — arah A (Editorial Oxblood)     |
 | 3 — Fondasi     | ⏳ hampir selesai (komponen dasar menyusul) |
 | 4–7             | ⏳ menunggu                                 |
 
-**Aksi berikutnya:** buat 3 style tile di `design/style-tiles/` dan pilih satu arah.
+**Aksi berikutnya:** selesaikan komponen dasar Fase 3 (`SectionHeading`,
+`Button`, `Badge`), lalu masuk Hero di Fase 4.

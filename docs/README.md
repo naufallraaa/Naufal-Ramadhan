@@ -1,6 +1,7 @@
 # Portofolio — Project Docs
 
-**Status:** Fase 0–1 selesai, Fase 3 hampir selesai. Berikutnya: style tiles.
+**Status:** Fase 0–2 selesai, Fase 3 hampir selesai. Arah visual: A — Editorial
+Oxblood.
 
 Portofolio pribadi bilingual (Indonesia/English) dengan fokus data & AI.
 Satu halaman panjang untuk profil, experience, projects, tech stack, education,
@@ -51,6 +52,7 @@ dan organization — plus halaman detail per project.
 - Hero memakai mockup browser window.
 - Light + dark toggle.
 - Referensi visual utama: Perry Wang.
+- Arah visual: **A — Editorial Oxblood** (dipilih dari 3 style tile).
 
 ---
 
@@ -59,4 +61,3 @@ dan organization — plus halaman detail per project.
 - Role final: data/AI (akan dibahas lebih lanjut).
 - Nama, bio, sosial links, dan isi konten asli.
 - Referensi visual tambahan (opsional).
-- Pemilihan style tile A/B/C sebelum implementasi.

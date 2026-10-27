@@ -1,0 +1,1005 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A — Editorial Oxblood · Style Tile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #faf7f4;
+        --surface: #f2eae6;
+        --ink: #1c1414;
+        --muted: #6b5d59;
+        --line: #e5d8d3;
+        --brand: #4a0404;
+        --brand-hover: #6b0808;
+        --brand-deep: #2e0202;
+        --brand-text: #4a0404;
+        --on-brand: #faf7f4;
+        --noise: 0.12;
+        --shadow: 0 24px 48px -24px rgba(46, 2, 2, 0.28);
+        --glare: rgba(255, 255, 255, 0.8);
+        color-scheme: light;
+      }
+
+      html[data-theme="dark"] {
+        --bg: #140b0a;
+        --surface: #1e1110;
+        --ink: #f4edea;
+        --muted: #a8938d;
+        --line: rgba(244, 237, 234, 0.12);
+        --brand-text: #e26a5e;
+        --on-brand: #f4edea;
+        --noise: 0.18;
+        --shadow: 0 32px 64px -24px rgba(0, 0, 0, 0.6);
+        --glare: rgba(244, 237, 234, 0.65);
+        color-scheme: dark;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        border-color: var(--line);
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Geist, ui-sans-serif, system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .mono {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.6875rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.25rem;
+      }
+
+      @media (min-width: 640px) {
+        .wrap {
+          padding: 0 2rem;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .wrap {
+          padding: 0 2.5rem;
+        }
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .site-header__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        height: 4.5rem;
+      }
+
+      .wordmark {
+        display: flex;
+        align-items: baseline;
+        gap: 0.625rem;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+        font-size: 0.9375rem;
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      .wordmark span {
+        color: var(--brand-text);
+      }
+
+      .header-nav {
+        display: none;
+        gap: 1.75rem;
+      }
+
+      @media (min-width: 900px) {
+        .header-nav {
+          display: flex;
+        }
+      }
+
+      .header-nav a {
+        font-size: 0.875rem;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 160ms ease-out;
+      }
+
+      .header-nav a:hover {
+        color: var(--ink);
+      }
+
+      .header-tools {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .locale {
+        display: flex;
+        gap: 0.125rem;
+        padding: 0.25rem;
+        border: 1px solid var(--line);
+        border-radius: 0.5rem;
+      }
+
+      .locale button {
+        padding: 0.375rem 0.625rem;
+        border: 0;
+        border-radius: 0.375rem;
+        background: transparent;
+        color: var(--muted);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.6875rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .locale button[aria-pressed="true"] {
+        background: var(--brand);
+        color: var(--on-brand);
+      }
+
+      .icon-btn {
+        display: grid;
+        place-items: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 1px solid var(--line);
+        border-radius: 0.5rem;
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        transition: background 160ms ease-out;
+      }
+
+      .icon-btn:hover {
+        background: var(--surface);
+      }
+
+      .icon-btn svg {
+        width: 1rem;
+        height: 1rem;
+      }
+
+      html[data-theme="light"] .icon-sun,
+      html[data-theme="dark"] .icon-moon {
+        display: none;
+      }
+
+      .hero {
+        position: relative;
+        background: var(--brand);
+        color: var(--on-brand);
+        overflow: hidden;
+        padding: clamp(3rem, 7vw, 6rem) 0 clamp(4rem, 9vw, 8rem);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: var(--noise);
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      .hero__overline {
+        position: relative;
+        z-index: 1;
+        margin: 0 0 2.5rem;
+        color: rgba(250, 247, 244, 0.6);
+      }
+
+      .window {
+        position: relative;
+        z-index: 1;
+        max-width: 1100px;
+        border: 1px solid rgba(250, 247, 244, 0.18);
+        border-radius: 1rem;
+        background: rgba(46, 2, 2, 0.35);
+        box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.7);
+        overflow: hidden;
+      }
+
+      .window::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent 10%,
+          rgba(250, 247, 244, 0.7) 50%,
+          transparent 90%
+        );
+      }
+
+      .window__bar {
+        display: flex;
+        align-items: center;
+        gap: 0.875rem;
+        height: 2.5rem;
+        padding: 0 1rem;
+        border-bottom: 1px solid rgba(250, 247, 244, 0.12);
+      }
+
+      .dots {
+        display: flex;
+        gap: 0.375rem;
+      }
+
+      .dots i {
+        display: block;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: rgba(250, 247, 244, 0.22);
+      }
+
+      .address {
+        flex: 1;
+        max-width: 18rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(250, 247, 244, 0.07);
+        color: rgba(250, 247, 244, 0.55);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.625rem;
+        letter-spacing: 0.06em;
+        text-align: center;
+      }
+
+      .window__body {
+        padding: clamp(1.5rem, 5vw, 4rem);
+      }
+
+      .headline {
+        margin: 0;
+        max-width: 18ch;
+        font-size: clamp(3.25rem, 7.5vw, 6rem);
+        font-weight: 500;
+        line-height: 0.92;
+        letter-spacing: -0.035em;
+        text-wrap: balance;
+      }
+
+      .headline em {
+        font-family: "Instrument Serif", Georgia, serif;
+        font-style: italic;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+      }
+
+      .hero__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        margin: 2.5rem 0 0;
+        color: rgba(250, 247, 244, 0.6);
+      }
+
+      .hero__meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .hero__meta span + span::before {
+        content: "·";
+        color: rgba(250, 247, 244, 0.3);
+      }
+
+      .hero__cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 2rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        border-radius: 0.625rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition:
+          background 160ms ease-out,
+          border-color 160ms ease-out,
+          transform 160ms ease-out;
+      }
+
+      .btn--solid {
+        background: var(--on-brand);
+        color: var(--brand);
+      }
+
+      .btn--solid:hover {
+        background: #fff;
+      }
+
+      .btn--ghost {
+        border: 1px solid rgba(250, 247, 244, 0.3);
+        color: var(--on-brand);
+      }
+
+      .btn--ghost:hover {
+        border-color: rgba(250, 247, 244, 0.6);
+        background: rgba(250, 247, 244, 0.06);
+      }
+
+      .section {
+        padding: clamp(4.5rem, 9vw, 9rem) 0;
+      }
+
+      .section + .section {
+        border-top: 1px solid var(--line);
+      }
+
+      .section-head {
+        display: grid;
+        gap: 1rem;
+        margin-bottom: clamp(2.5rem, 5vw, 4rem);
+      }
+
+      @media (min-width: 900px) {
+        .section-head {
+          grid-template-columns: 1fr 1fr;
+          align-items: end;
+          gap: 3rem;
+        }
+      }
+
+      .section-head__label {
+        color: var(--muted);
+        margin: 0 0 1rem;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-size: clamp(2rem, 3.5vw, 3rem);
+        font-weight: 500;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        text-wrap: balance;
+      }
+
+      .section-head p {
+        margin: 0;
+        max-width: 34ch;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .project-grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 900px) {
+        .project-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .project {
+        display: block;
+        padding: 6px;
+        border: 1px solid var(--line);
+        border-radius: 1.375rem;
+        text-decoration: none;
+        color: inherit;
+        transition:
+          border-color 200ms ease-out,
+          transform 200ms ease-out;
+      }
+
+      .project:hover {
+        border-color: var(--brand-text);
+        transform: translateY(-2px);
+      }
+
+      .project__inner {
+        position: relative;
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        overflow: hidden;
+        background: var(--surface);
+      }
+
+      .project__inner::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        z-index: 2;
+        background: linear-gradient(
+          to right,
+          transparent 15%,
+          var(--glare) 50%,
+          transparent 85%
+        );
+      }
+
+      .project__cover {
+        aspect-ratio: 4 / 3;
+        background:
+          radial-gradient(
+            circle at 30% 25%,
+            rgba(226, 106, 94, 0.35),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 75% 70%,
+            rgba(74, 4, 4, 0.9),
+            transparent 60%
+          ),
+          linear-gradient(145deg, #2e0202, #4a0404 55%, #6b0808);
+        display: grid;
+        place-items: center;
+      }
+
+      .project__cover--alt {
+        background:
+          radial-gradient(
+            circle at 70% 30%,
+            rgba(226, 106, 94, 0.28),
+            transparent 55%
+          ),
+          radial-gradient(
+            circle at 25% 75%,
+            rgba(107, 8, 8, 0.95),
+            transparent 60%
+          ),
+          linear-gradient(200deg, #2e0202, #4a0404 60%, #2e0202);
+      }
+
+      .project__cover span {
+        font-family: "Instrument Serif", Georgia, serif;
+        font-style: italic;
+        font-size: clamp(2.25rem, 4vw, 3.25rem);
+        color: rgba(250, 247, 244, 0.85);
+      }
+
+      .project__body {
+        padding: 1.5rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .project__title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .project__title h3 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+      }
+
+      .project__arrow {
+        color: var(--brand-text);
+        transition: transform 160ms ease-out;
+      }
+
+      .project:hover .project__arrow {
+        transform: translate(3px, -3px);
+      }
+
+      .project__meta {
+        margin: 0.5rem 0 0;
+        color: var(--muted);
+      }
+
+      .project__summary {
+        margin: 1rem 0 0;
+        color: var(--muted);
+        line-height: 1.7;
+        max-width: 46ch;
+      }
+
+      .metrics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1.25rem;
+      }
+
+      .metric {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        padding: 0.375rem 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+      }
+
+      .metric b {
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 0.75rem;
+      }
+
+      .exp-row {
+        display: grid;
+        gap: 0.5rem;
+        padding: 1.5rem 0;
+        border-top: 1px solid var(--line);
+        transition: background 160ms ease-out;
+      }
+
+      @media (min-width: 768px) {
+        .exp-row {
+          grid-template-columns: 10rem 1fr 1.2fr;
+          gap: 2rem;
+          align-items: baseline;
+        }
+      }
+
+      .exp-row:hover {
+        background: var(--surface);
+      }
+
+      .exp-row__period {
+        color: var(--muted);
+      }
+
+      .exp-row__role {
+        font-size: 1.0625rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+
+      .exp-row__org {
+        display: block;
+        margin-top: 0.25rem;
+        color: var(--muted);
+        font-size: 0.875rem;
+        font-weight: 400;
+      }
+
+      .exp-row__desc {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 0.9375rem;
+      }
+
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .badge {
+        padding: 0.375rem 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        color: var(--ink);
+        transition:
+          background 160ms ease-out,
+          color 160ms ease-out,
+          border-color 160ms ease-out;
+      }
+
+      .badge:hover {
+        background: var(--brand);
+        border-color: var(--brand);
+        color: var(--on-brand);
+      }
+
+      .stack-group + .stack-group {
+        margin-top: 1.5rem;
+      }
+
+      .stack-group__label {
+        margin: 0 0 0.75rem;
+        color: var(--muted);
+      }
+
+      .site-footer {
+        position: relative;
+        overflow: hidden;
+        background: var(--brand);
+        color: var(--on-brand);
+      }
+
+      .site-footer::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: var(--noise);
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      .site-footer__inner {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 2rem;
+        padding: clamp(3rem, 6vw, 5rem) 0 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .site-footer__inner {
+          grid-template-columns: 1.4fr 1fr;
+          align-items: start;
+        }
+      }
+
+      .footer-word {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 500;
+        letter-spacing: -0.035em;
+        line-height: 1;
+      }
+
+      .footer-note {
+        margin: 1rem 0 0;
+        color: rgba(250, 247, 244, 0.6);
+        max-width: 30ch;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .footer-links a {
+        color: rgba(250, 247, 244, 0.75);
+        text-decoration: none;
+        font-size: 0.9375rem;
+        transition: color 160ms ease-out;
+      }
+
+      .footer-links a:hover {
+        color: var(--on-brand);
+      }
+
+      .footer-base {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: space-between;
+        padding: 1.5rem 0;
+        border-top: 1px solid rgba(250, 247, 244, 0.15);
+        color: rgba(250, 247, 244, 0.5);
+      }
+
+      .variant {
+        position: fixed;
+        left: 1rem;
+        bottom: 1rem;
+        z-index: 60;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--bg);
+        color: var(--muted);
+        box-shadow: var(--shadow);
+        pointer-events: none;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--brand-text);
+        outline-offset: 3px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap site-header__inner">
+        <a class="wordmark" href="#">Nama Kamu <span>/ 01</span></a>
+
+        <nav class="header-nav">
+          <a href="#work">Work</a>
+          <a href="#experience">Experience</a>
+          <a href="#stack">Stack</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="header-tools">
+          <div class="locale" role="group" aria-label="Language">
+            <button type="button" aria-pressed="true">ID</button>
+            <button type="button" aria-pressed="false">EN</button>
+          </div>
+
+          <button class="icon-btn" type="button" id="theme-toggle" aria-label="Toggle theme" aria-pressed="false">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="wrap">
+        <p class="mono hero__overline">Portfolio / 2026 — Variant A</p>
+
+        <div class="window">
+          <div class="window__bar">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <div class="address">namakamu.dev</div>
+          </div>
+
+          <div class="window__body">
+            <h1 class="headline">
+              Turning data into decisions that <em>matter.</em>
+            </h1>
+
+            <p class="mono hero__meta">
+              <span>Data &amp; AI</span>
+              <span>Jakarta, Indonesia</span>
+              <span>Open to opportunities</span>
+            </p>
+
+            <div class="hero__cta">
+              <a class="btn btn--solid" href="#work">View work</a>
+              <a class="btn btn--ghost" href="#contact">Download CV</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="mono section-head__label">01 — Selected work</p>
+            <h2>What I've been building</h2>
+          </div>
+          <p>
+            A short selection of data and machine learning work, from model
+            training to the interfaces that make the output usable.
+          </p>
+        </div>
+
+        <div class="project-grid">
+        <a class="project" href="#">
+          <div class="project__inner">
+            <div class="project__cover"><span>0.91</span></div>
+            <div class="project__body">
+              <div class="project__title">
+                <h3>Customer Churn Prediction</h3>
+                <svg class="project__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                  <path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <p class="mono project__meta">Company Name · 2025</p>
+              <p class="project__summary">
+                Gradient boosting model that flags at-risk customers a month
+                ahead, paired with a review dashboard for the retention team.
+              </p>
+              <div class="metrics">
+                <span class="metric"><b>0.91</b><span>F1</span></span>
+                <span class="metric"><b>48k</b><span>rows</span></span>
+                <span class="metric"><b>4</b><span>features</span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a class="project" href="#">
+          <div class="project__inner">
+            <div class="project__cover project__cover--alt"><span>3.2s</span></div>
+            <div class="project__body">
+              <div class="project__title">
+                <h3>Realtime Demand Forecast</h3>
+                <svg class="project__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                  <path d="M7 17 17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <p class="mono project__meta">Another Company · 2024</p>
+              <p class="project__summary">
+                Streaming forecast that refreshes every five minutes, cutting
+                stockouts on perishable goods by a third in the first quarter.
+              </p>
+              <div class="metrics">
+                <span class="metric"><b>3.2s</b><span>latency</span></span>
+                <span class="metric"><b>-34%</b><span>stockouts</span></span>
+              </div>
+            </div>
+          </div>
+        </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="mono section-head__label">02 — Experience</p>
+            <h2>Where I've worked</h2>
+          </div>
+          <p>
+            Roles across data science and engineering, with a bias toward
+            shipping things people actually use.
+          </p>
+        </div>
+
+        <div class="exp-row">
+          <p class="mono exp-row__period">Jul 2023 — Present</p>
+          <div>
+            <div class="exp-row__role">
+              Data Scientist
+              <span class="exp-row__org">Company Name · Jakarta</span>
+            </div>
+          </div>
+          <p class="exp-row__desc">
+            Built the churn pipeline end to end — feature store, training,
+            evaluation, and the dashboard the retention team checks each
+            morning.
+          </p>
+        </div>
+
+        <div class="exp-row">
+          <p class="mono exp-row__period">Jan 2022 — Jun 2023</p>
+          <div>
+            <div class="exp-row__role">
+              Data Analyst
+              <span class="exp-row__org">Another Company · Remote</span>
+            </div>
+          </div>
+          <p class="exp-row__desc">
+            Turned ad-hoc requests into reusable models and reports, cutting
+            the weekly reporting cycle from three days to a few hours.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stack">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="mono section-head__label">03 — Stack</p>
+            <h2>Tools I reach for</h2>
+          </div>
+          <p>Grouped by what they do, not by how well I claim to know them.</p>
+        </div>
+
+        <div class="stack-group">
+          <p class="mono stack-group__label">Languages</p>
+          <div class="badges">
+            <span class="badge">Python</span>
+            <span class="badge">TypeScript</span>
+            <span class="badge">SQL</span>
+            <span class="badge">R</span>
+          </div>
+        </div>
+
+        <div class="stack-group">
+          <p class="mono stack-group__label">Data &amp; ML</p>
+          <div class="badges">
+            <span class="badge">pandas</span>
+            <span class="badge">scikit-learn</span>
+            <span class="badge">PyTorch</span>
+            <span class="badge">XGBoost</span>
+          </div>
+        </div>
+
+        <div class="stack-group">
+          <p class="mono stack-group__label">Tools</p>
+          <div class="badges">
+            <span class="badge">Jupyter</span>
+            <span class="badge">Git</span>
+            <span class="badge">Docker</span>
+            <span class="badge">dbt</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer" id="contact">
+      <div class="wrap">
+        <div class="site-footer__inner">
+          <div>
+            <p class="footer-word">Let's talk.</p>
+            <p class="footer-note">Made over coffee, two shots, no sugar.</p>
+          </div>
+
+          <div class="footer-links">
+            <a href="mailto:hello@example.com">hello@example.com</a>
+            <a href="#">GitHub</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Download CV</a>
+          </div>
+        </div>
+
+        <div class="footer-base mono">
+          <span>© 2026 — All rights reserved</span>
+          <span>Jakarta, Indonesia</span>
+        </div>
+      </div>
+    </footer>
+
+    <div class="variant mono">A — Editorial Oxblood</div>
+
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var toggle = document.getElementById("theme-toggle");
+        var stored = localStorage.getItem("tile-theme");
+
+        function apply(theme) {
+          root.setAttribute("data-theme", theme);
+          toggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+        }
+
+        apply(stored || root.getAttribute("data-theme") || "light");
+
+        toggle.addEventListener("click", function () {
+          var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          apply(next);
+          localStorage.setItem("tile-theme", next);
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>B — Quiet Luxury · Style Tile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #faf7f4;
+        --surface: #f2eae6;
+        --ink: #1c1414;
+        --muted: #6b5d59;
+        --line: #e5d8d3;
+        --brand: #4a0404;
+        --brand-text: #4a0404;
+        --on-brand: #faf7f4;
+        --noise: 0.08;
+        color-scheme: light;
+      }
+
+      html[data-theme="dark"] {
+        --bg: #140b0a;
+        --surface: #1e1110;
+        --ink: #f4edea;
+        --muted: #a8938d;
+        --line: rgba(244, 237, 234, 0.12);
+        --brand-text: #e26a5e;
+        --on-brand: #f4edea;
+        --noise: 0.1;
+        color-scheme: dark;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        border-color: var(--line);
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Geist, ui-sans-serif, system-ui, sans-serif;
+        font-weight: 300;
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.7;
+      }
+
+      .mono {
+        font-family: "JetBrains Mono", ui-monospace, monospace;
+        font-size: 0.625rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-weight: 400;
+      }
+
+      .serif {
+        font-family: "Instrument Serif", Georgia, serif;
+        font-style: italic;
+        font-weight: 400;
+        letter-spacing: -0.005em;
+      }
+
+      .wrap {
+        width: 100%;
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      @media (min-width: 768px) {
+        .wrap {
+          padding: 0 3rem;
+        }
+      }
+
+      /* ---------- header ---------- */
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .site-header__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        height: 5rem;
+      }
+
+      .wordmark {
+        font-size: 0.875rem;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      .header-nav {
+        display: none;
+        gap: 2.25rem;
+      }
+
+      @media (min-width: 900px) {
+        .header-nav {
+          display: flex;
+        }
+      }
+
+      .header-nav a {
+        font-size: 0.8125rem;
+        color: var(--muted);
+        text-decoration: none;
+        letter-spacing: 0.01em;
+        transition: color 200ms ease-out;
+      }
+
+      .header-nav a:hover {
+        color: var(--ink);
+      }
+
+      .header-tools {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .locale {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .locale button {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.625rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: color 200ms ease-out;
+      }
+
+      .locale button[aria-pressed="true"] {
+        color: var(--ink);
+        text-decoration: underline;
+        text-underline-offset: 0.35em;
+      }
+
+      .icon-btn {
+        display: grid;
+        place-items: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        border: 0;
+        border-radius: 50%;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        transition:
+          color 200ms ease-out,
+          background 200ms ease-out;
+      }
+
+      .icon-btn:hover {
+        background: var(--surface);
+        color: var(--ink);
+      }
+
+      .icon-btn svg {
+        width: 0.9375rem;
+        height: 0.9375rem;
+      }
+
+      html[data-theme="light"] .icon-sun,
+      html[data-theme="dark"] .icon-moon {
+        display: none;
+      }
+
+      /* ---------- hero ---------- */
+
+      .hero {
+        position: relative;
+        background: var(--brand);
+        color: var(--on-brand);
+        overflow: hidden;
+        padding: clamp(4rem, 9vw, 7rem) 0 clamp(4.5rem, 10vw, 8rem);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: var(--noise);
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      .hero .wrap {
+        position: relative;
+        z-index: 1;
+      }
+
+      .window {
+        max-width: 940px;
+        border: 1px solid rgba(250, 247, 244, 0.16);
+        border-radius: 0.5rem;
+        background: rgba(46, 2, 2, 0.22);
+      }
+
+      .window__bar {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        height: 2.25rem;
+        padding: 0 1.25rem;
+        border-bottom: 1px solid rgba(250, 247, 244, 0.1);
+      }
+
+      .dots {
+        display: flex;
+        gap: 0.3125rem;
+      }
+
+      .dots i {
+        display: block;
+        width: 0.375rem;
+        height: 0.375rem;
+        border-radius: 50%;
+        background: rgba(250, 247, 244, 0.18);
+      }
+
+      .address {
+        color: rgba(250, 247, 244, 0.4);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.5625rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .window__body {
+        padding: clamp(2.5rem, 7vw, 5rem);
+      }
+
+      .hero__overline {
+        margin: 0 0 2rem;
+        color: rgba(250, 247, 244, 0.45);
+      }
+
+      .headline {
+        margin: 0;
+        max-width: 20ch;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        font-weight: 300;
+        line-height: 1.06;
+        letter-spacing: -0.025em;
+        text-wrap: balance;
+      }
+
+      .headline em {
+        font-family: "Instrument Serif", Georgia, serif;
+        font-style: italic;
+        font-weight: 400;
+      }
+
+      .hero__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.25rem;
+        margin: 2.75rem 0 0;
+        color: rgba(250, 247, 244, 0.5);
+      }
+
+      .hero__meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
+      }
+
+      .hero__meta span + span::before {
+        content: "";
+        display: block;
+        width: 1.25rem;
+        height: 1px;
+        background: rgba(250, 247, 244, 0.25);
+      }
+
+      .hero__cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.75rem;
+        margin-top: 2.5rem;
+        align-items: center;
+      }
+
+      .btn {
+        font-size: 0.8125rem;
+        letter-spacing: 0.01em;
+        text-decoration: none;
+        color: var(--on-brand);
+        padding-bottom: 0.25rem;
+        border-bottom: 1px solid rgba(250, 247, 244, 0.35);
+        transition: border-color 200ms ease-out;
+      }
+
+      .btn:hover {
+        border-color: var(--on-brand);
+      }
+
+      .btn--quiet {
+        border-bottom-color: transparent;
+        color: rgba(250, 247, 244, 0.55);
+      }
+
+      .btn--quiet:hover {
+        color: var(--on-brand);
+        border-bottom-color: rgba(250, 247, 244, 0.35);
+      }
+
+      /* ---------- sections ---------- */
+
+      .section {
+        padding: clamp(4rem, 7vw, 6.5rem) 0;
+      }
+
+      .section-head {
+        margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+        max-width: 46rem;
+      }
+
+      .section-head__label {
+        color: var(--muted);
+        margin: 0 0 1.75rem;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        font-family: "Instrument Serif", Georgia, serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.1;
+        letter-spacing: -0.01em;
+      }
+
+      .section-head p {
+        margin: 1.5rem 0 0;
+        max-width: 40ch;
+        color: var(--muted);
+        font-size: 0.9375rem;
+        line-height: 1.8;
+      }
+
+      /* ---------- project card ---------- */
+
+      .project {
+        display: grid;
+        gap: 0;
+        border: 1px solid var(--line);
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 240ms ease-out;
+      }
+
+      @media (min-width: 768px) {
+        .project {
+          grid-template-columns: 20rem 1fr;
+        }
+      }
+
+      .project:hover {
+        border-color: var(--muted);
+      }
+
+      .project__cover {
+        aspect-ratio: 4 / 3;
+        background: linear-gradient(160deg, #f2eae6, #e5d8d3 70%, #d9c7c0);
+        display: grid;
+        place-items: center;
+        border-bottom: 1px solid var(--line);
+      }
+
+      html[data-theme="dark"] .project__cover {
+        background: linear-gradient(160deg, #2e0202, #4a0404 70%, #1e1110);
+      }
+
+      @media (min-width: 768px) {
+        .project__cover {
+          aspect-ratio: auto;
+          border-bottom: 0;
+          border-right: 1px solid var(--line);
+        }
+      }
+
+      .project__cover span {
+        font-family: "Instrument Serif", Georgia, serif;
+        font-style: italic;
+        font-size: 3rem;
+        color: var(--brand);
+      }
+
+      html[data-theme="dark"] .project__cover span {
+        color: rgba(244, 237, 234, 0.75);
+      }
+
+      .project__body {
+        padding: clamp(1.75rem, 4vw, 2.75rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .project__meta {
+        margin: 0 0 1rem;
+        color: var(--muted);
+      }
+
+      .project__title {
+        margin: 0;
+        font-size: 1.375rem;
+        font-weight: 400;
+        letter-spacing: -0.015em;
+        line-height: 1.3;
+      }
+
+      .project__summary {
+        margin: 0.875rem 0 0;
+        color: var(--muted);
+        font-size: 0.9375rem;
+        line-height: 1.8;
+        max-width: 42ch;
+      }
+
+      .project__foot {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-top: 1.75rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--line);
+      }
+
+      .metrics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+      }
+
+      .metric b {
+        display: block;
+        font-weight: 400;
+        font-size: 1.125rem;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.01em;
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 0.6875rem;
+      }
+
+      .read-more {
+        font-size: 0.8125rem;
+        color: var(--brand-text);
+        transition: opacity 200ms ease-out;
+      }
+
+      .project:hover .read-more {
+        opacity: 0.7;
+      }
+
+      /* ---------- experience ---------- */
+
+      .exp-list {
+        border-top: 1px solid var(--line);
+      }
+
+      .exp-row {
+        display: grid;
+        gap: 0.75rem;
+        padding: 2.25rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      @media (min-width: 768px) {
+        .exp-row {
+          grid-template-columns: 12rem 1fr;
+          gap: 3rem;
+        }
+      }
+
+      .exp-row__period {
+        color: var(--muted);
+        padding-top: 0.35rem;
+      }
+
+      .exp-row__role {
+        margin: 0;
+        font-family: "Instrument Serif", Georgia, serif;
+        font-style: italic;
+        font-size: 1.375rem;
+        line-height: 1.3;
+      }
+
+      .exp-row__org {
+        display: block;
+        margin-top: 0.375rem;
+        font-family: Geist, sans-serif;
+        font-style: normal;
+        font-size: 0.8125rem;
+        color: var(--muted);
+        letter-spacing: 0.01em;
+      }
+
+      .exp-row__desc {
+        margin: 0.875rem 0 0;
+        color: var(--muted);
+        font-size: 0.9375rem;
+        line-height: 1.8;
+        max-width: 52ch;
+      }
+
+      /* ---------- stack ---------- */
+
+      .stack {
+        display: grid;
+        gap: 3rem;
+      }
+
+      @media (min-width: 768px) {
+        .stack {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
+        }
+      }
+
+      .stack-group__label {
+        margin: 0 0 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+      }
+
+      .stack-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.625rem;
+        font-size: 0.9375rem;
+        color: var(--ink);
+      }
+
+      .stack-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .stack-list li::before {
+        content: "";
+        width: 0.25rem;
+        height: 0.25rem;
+        border-radius: 50%;
+        background: var(--line);
+        flex-shrink: 0;
+      }
+
+      /* ---------- footer ---------- */
+
+      .site-footer {
+        position: relative;
+        overflow: hidden;
+        background: var(--brand);
+        color: var(--on-brand);
+      }
+
+      .site-footer::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: var(--noise);
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      .site-footer .wrap {
+        position: relative;
+        z-index: 1;
+      }
+
+      .site-footer__inner {
+        display: grid;
+        gap: 3rem;
+        padding: clamp(4rem, 8vw, 6rem) 0;
+      }
+
+      @media (min-width: 768px) {
+        .site-footer__inner {
+          grid-template-columns: 1fr auto;
+          align-items: end;
+          gap: 4rem;
+        }
+      }
+
+      .footer-word {
+        margin: 0;
+        font-family: "Instrument Serif", Georgia, serif;
+        font-style: italic;
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        line-height: 1;
+      }
+
+      .footer-note {
+        margin: 1.5rem 0 0;
+        color: rgba(250, 247, 244, 0.5);
+        font-size: 0.875rem;
+        max-width: 26ch;
+      }
+
+      .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.875rem;
+      }
+
+      .footer-links a {
+        color: rgba(250, 247, 244, 0.7);
+        text-decoration: none;
+        font-size: 0.875rem;
+        transition: color 200ms ease-out;
+      }
+
+      .footer-links a:hover {
+        color: var(--on-brand);
+      }
+
+      .footer-base {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: space-between;
+        padding: 1.75rem 0;
+        border-top: 1px solid rgba(250, 247, 244, 0.12);
+        color: rgba(250, 247, 244, 0.4);
+      }
+
+      .variant {
+        position: fixed;
+        left: 1rem;
+        bottom: 1rem;
+        z-index: 60;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: var(--bg);
+        color: var(--muted);
+        pointer-events: none;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--brand-text);
+        outline-offset: 3px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap site-header__inner">
+        <a class="wordmark" href="#">Nama Kamu</a>
+
+        <nav class="header-nav">
+          <a href="#work">Work</a>
+          <a href="#experience">Experience</a>
+          <a href="#stack">Stack</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="header-tools">
+          <div class="locale" role="group" aria-label="Language">
+            <button type="button" aria-pressed="true">ID</button>
+            <button type="button" aria-pressed="false">EN</button>
+          </div>
+
+          <button class="icon-btn" type="button" id="theme-toggle" aria-label="Toggle theme" aria-pressed="false">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="wrap">
+        <div class="window">
+          <div class="window__bar">
+            <div class="dots"><i></i><i></i><i></i></div>
+            <div class="address">namakamu.dev</div>
+          </div>
+
+          <div class="window__body">
+            <p class="mono hero__overline">Portfolio / 2026 — Variant B</p>
+
+            <h1 class="headline">
+              Turning data into decisions that <em>matter.</em>
+            </h1>
+
+            <p class="mono hero__meta">
+              <span>Data &amp; AI</span>
+              <span>Jakarta, Indonesia</span>
+              <span>Open to opportunities</span>
+            </p>
+
+            <div class="hero__cta">
+              <a class="btn" href="#work">View work</a>
+              <a class="btn btn--quiet" href="#contact">Download CV</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="mono section-head__label">Selected work</p>
+          <h2>What I've been building</h2>
+          <p>
+            A short selection of data and machine learning work, from model
+            training to the interfaces that make the output usable.
+          </p>
+        </div>
+
+        <a class="project" href="#">
+          <div class="project__cover"><span>0.91</span></div>
+          <div class="project__body">
+            <p class="mono project__meta">Company Name · 2025</p>
+            <h3 class="project__title">Customer Churn Prediction</h3>
+            <p class="project__summary">
+              Gradient boosting model that flags at-risk customers a month
+              ahead, paired with a review dashboard for the retention team.
+            </p>
+            <div class="project__foot">
+              <div class="metrics">
+                <div class="metric"><b>0.91</b><span class="mono">F1</span></div>
+                <div class="metric"><b>48k</b><span class="mono">Rows</span></div>
+                <div class="metric"><b>4</b><span class="mono">Features</span></div>
+              </div>
+              <span class="read-more">Read case study →</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="mono section-head__label">Experience</p>
+          <h2>Where I've worked</h2>
+        </div>
+
+        <div class="exp-list">
+          <div class="exp-row">
+            <p class="mono exp-row__period">Jul 2023 — Present</p>
+            <div>
+              <p class="exp-row__role">
+                Data Scientist
+                <span class="exp-row__org">Company Name · Jakarta</span>
+              </p>
+              <p class="exp-row__desc">
+                Built the churn pipeline end to end — feature store, training,
+                evaluation, and the dashboard the retention team checks each
+                morning.
+              </p>
+            </div>
+          </div>
+
+          <div class="exp-row">
+            <p class="mono exp-row__period">Jan 2022 — Jun 2023</p>
+            <div>
+              <p class="exp-row__role">
+                Data Analyst
+                <span class="exp-row__org">Another Company · Remote</span>
+              </p>
+              <p class="exp-row__desc">
+                Turned ad-hoc requests into reusable models and reports, cutting
+                the weekly reporting cycle from three days to a few hours.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stack">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="mono section-head__label">Stack</p>
+          <h2>Tools I reach for</h2>
+        </div>
+
+        <div class="stack">
+          <div class="stack-group">
+            <p class="mono stack-group__label">Languages</p>
+            <ul class="stack-list">
+              <li>Python</li>
+              <li>TypeScript</li>
+              <li>SQL</li>
+              <li>R</li>
+            </ul>
+          </div>
+
+          <div class="stack-group">
+            <p class="mono stack-group__label">Data &amp; ML</p>
+            <ul class="stack-list">
+              <li>pandas</li>
+              <li>scikit-learn</li>
+              <li>PyTorch</li>
+              <li>XGBoost</li>
+            </ul>
+          </div>
+
+          <div class="stack-group">
+            <p class="mono stack-group__label">Tools</p>
+            <ul class="stack-list">
+              <li>Jupyter</li>
+              <li>Git</li>
+              <li>Docker</li>
+              <li>dbt</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer" id="contact">
+      <div class="wrap">
+        <div class="site-footer__inner">
+          <div>
+            <p class="footer-word">Let's talk.</p>
+            <p class="footer-note">Made over coffee, two shots, no sugar.</p>
+          </div>
+
+          <div class="footer-links">
+            <a href="mailto:hello@example.com">hello@example.com</a>
+            <a href="#">GitHub</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Download CV</a>
+          </div>
+        </div>
+
+        <div class="footer-base mono">
+          <span>© 2026 — All rights reserved</span>
+          <span>Jakarta, Indonesia</span>
+        </div>
+      </div>
+    </footer>
+
+    <div class="variant mono">B — Quiet Luxury</div>
+
+    <script>
+      (function () {
+        var root = document.documentElement;
+        var toggle = document.getElementById("theme-toggle");
+        var stored = localStorage.getItem("tile-theme");
+
+        function apply(theme) {
+          root.setAttribute("data-theme", theme);
+          toggle.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+        }
+
+        apply(stored || root.getAttribute("data-theme") || "light");
+
+        toggle.addEventListener("click", function () {
+          var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          apply(next);
+          localStorage.setItem("tile-theme", next);
+        });
+      })();
+    </script>
+  </body>
+</html>
