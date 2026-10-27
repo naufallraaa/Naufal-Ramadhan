@@ -14,36 +14,25 @@
     "overline": "Portofolio / 2026",
     "title": "Mengubah data menjadi keputusan yang",
     "titleAccent": "berarti.",
-    "subtitle": "Data & AI enthusiast. Membangun model, pipeline, dan antarmuka yang membuat data benar-benar berguna.",
     "ctaWork": "Lihat karya",
-    "ctaCv": "Unduh CV",
+    "ctaContact": "Hubungi saya",
     "scroll": "Scroll untuk melihat"
   },
-  "setup": {
-    "badge": "Fondasi siap",
-    "title": "Tech stack sudah terpasang",
-    "description": "Next.js 16, TypeScript, Tailwind v4, next-intl, Zod, dan Bun. Halaman ini masih placeholder — section final menyusul.",
-    "direction": "Arah A · Editorial Oxblood",
-    "palette": "Palet inti",
-    "localeLabel": "Bahasa aktif",
-    "themeLabel": "Tema aktif",
-    "checks": {
-      "framework": "Next.js 16 App Router + Turbopack",
-      "language": "TypeScript strict + ESLint + Prettier",
-      "style": "Tailwind v4 dengan token oxblood",
-      "i18n": "next-intl — /id dan /en",
-      "content": "Zod untuk validasi konten",
-      "runtime": "Bun 1.4 sebagai runtime lokal"
-    }
+  "sections": {
+    "workLabel": "01 — Karya pilihan",
+    "workTitle": "Yang sedang saya bangun",
+    "workDescription": "Pilihan kecil dari pekerjaan data dan machine learning — dari pelatihan model sampai antarmuka yang membuat hasilnya terpakai."
   },
   "footer": {
+    "contactLabel": "Kontak",
     "note": "Dibuat sambil ngopi, dua shot, tanpa gula.",
     "rights": "Semua hak dilindungi."
   },
   "a11y": {
     "toggleTheme": "Ganti tema",
     "switchLocale": "Ganti bahasa",
-    "skipToContent": "Lewati ke konten"
+    "skipToContent": "Lewati ke konten",
+    "primaryNav": "Navigasi utama"
   },
   "theme": {
     "light": "Terang",

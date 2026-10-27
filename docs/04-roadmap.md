@@ -77,14 +77,19 @@ tidak ada flash, keyboard navigation dasar berjalan.
 
 Urutan implementasi:
 
-1. [ ] Hero (browser window, noise, glare, CTA)
+1. [x] Hero (browser window, noise, glare, CTA)
 2. [ ] About
 3. [ ] Experience (timeline)
-4. [ ] Projects (featured grid + card)
+4. [x] Projects (featured grid + card)
 5. [ ] Tech Stack (badge per kategori)
 6. [ ] Education (timeline)
 7. [ ] Organization (timeline)
-8. [ ] Contact + footer
+8. [x] Contact + footer
+
+Catatan: card project belum me-link ke detail karena route
+`/[locale]/projects/[slug]` baru dibuat di Fase 5 — `ProjectCard` menerima prop
+`href` opsional agar tidak ada link ke 404. Nav header sementara hanya memuat
+anchor yang sudah ada (`#work`, `#contact`).
 
 **Selesai jika:** semua section terisi konten placeholder, responsif 360–1440,
 tidak ada overflow horizontal, light/dark sama-sama rapi.
@@ -157,8 +162,8 @@ tidak ada broken link.
 | 1 — Scaffold    | ✅ selesai                              |
 | 2 — Style tiles | ✅ selesai — arah A (Editorial Oxblood) |
 | 3 — Fondasi     | ✅ selesai                              |
-| 4 — Homepage    | ⏳ berikutnya (Hero → Contact)          |
+| 4 — Homepage    | ⏳ Hero, Projects, Contact selesai      |
 | 5–7             | ⏳ menunggu                             |
 
-**Aksi berikutnya:** Fase 4 — mulai dari Hero (browser window, noise, glare,
-CTA) sesuai `design/style-tiles/a-editorial.html`.
+**Aksi berikutnya:** lanjutkan Fase 4 — About, Experience, Tech Stack,
+Education, Organization.
