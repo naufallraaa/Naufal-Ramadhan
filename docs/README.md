@@ -1,7 +1,7 @@
 # Portofolio — Project Docs
 
-**Status:** Fase 0–2 selesai, Fase 3 hampir selesai. Arah visual: A — Editorial
-Oxblood.
+**Status:** Fase 0–3 selesai. Arah visual: A — Editorial Oxblood. Berikutnya:
+section homepage (Fase 4).
 
 Portofolio pribadi bilingual (Indonesia/English) dengan fokus data & AI.
 Satu halaman panjang untuk profil, experience, projects, tech stack, education,

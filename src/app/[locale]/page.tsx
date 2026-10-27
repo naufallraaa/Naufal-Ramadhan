@@ -1,6 +1,10 @@
 import { Check } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import { Badge } from "@/components/ui/badge";
+import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 const checks = [
   "framework",
@@ -31,7 +35,7 @@ export default async function HomePage() {
             {t("hero.overline")}
           </p>
 
-          <h1 className="mt-8 max-w-4xl text-[clamp(2.75rem,7vw,5.5rem)] leading-[0.94] font-medium tracking-[-0.035em] text-balance">
+          <h1 className="mt-8 max-w-4xl text-[clamp(3.25rem,7.5vw,6rem)] leading-[0.92] font-medium tracking-[-0.035em] text-balance">
             {t("hero.title")}{" "}
             <em className="font-serif font-normal">{t("hero.titleAccent")}</em>
           </h1>
@@ -41,16 +45,13 @@ export default async function HomePage() {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-3">
-            <a
-              href="#setup"
-              className="rounded-lg bg-on-brand px-5 py-3 text-sm font-medium text-brand transition-colors hover:bg-on-brand/90"
-            >
+            <ButtonLink href="/#setup" variant="solid">
               {t("hero.ctaWork")}
-            </a>
+            </ButtonLink>
             <span
               aria-disabled="true"
               title="CV placeholder — belum tersedia"
-              className="cursor-not-allowed rounded-lg border border-on-brand/30 px-5 py-3 text-sm text-on-brand/50"
+              className="inline-flex cursor-not-allowed items-center justify-center rounded-[10px] border border-on-brand/30 px-5 py-3 text-sm font-medium text-on-brand/50"
             >
               {t("hero.ctaCv")}
             </span>
@@ -58,71 +59,61 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section id="setup" className="py-16 sm:py-24">
-        <Container>
-          <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-            <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1 font-mono text-[10px] tracking-[0.12em] text-muted uppercase">
-                <span className="size-1.5 rounded-full bg-brand-text" />
-                {t("setup.badge")}
+      <Section id="setup" divided={false}>
+        <SectionHeading
+          label={t("setup.badge")}
+          title={t("setup.title")}
+          description={t("setup.description")}
+        />
+
+        <ul className="grid gap-3 sm:grid-cols-2">
+          {checks.map((key) => (
+            <li
+              key={key}
+              className="flex items-start gap-3 rounded-xl border border-line bg-surface p-4"
+            >
+              <Check
+                className="mt-0.5 size-4 shrink-0 text-brand-text"
+                aria-hidden="true"
+              />
+              <span className="text-sm leading-relaxed">
+                {t(`setup.checks.${key}`)}
               </span>
+            </li>
+          ))}
+        </ul>
 
-              <h2 className="mt-6 text-3xl font-medium tracking-tight text-balance sm:text-4xl">
-                {t("setup.title")}
-              </h2>
-
-              <p className="mt-4 max-w-md leading-relaxed text-muted">
-                {t("setup.description")}
-              </p>
-            </div>
-
-            <ul className="grid gap-3 sm:grid-cols-2">
-              {checks.map((key) => (
-                <li
-                  key={key}
-                  className="flex items-start gap-3 rounded-xl border border-line bg-surface p-4"
-                >
-                  <Check
-                    className="mt-0.5 size-4 shrink-0 text-brand-text"
-                    aria-hidden="true"
-                  />
-                  <span className="text-sm leading-relaxed">
-                    {t(`setup.checks.${key}`)}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="mt-16 border-t border-line pt-10">
+        <div className="mt-16 border-t border-line pt-10">
+          <div className="flex flex-wrap items-center justify-between gap-4">
             <h3 className="font-mono text-[11px] tracking-[0.14em] text-muted uppercase">
               {t("setup.palette")}
             </h3>
-
-            <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-              {palette.map((item) => (
-                <div
-                  key={item.name}
-                  className="overflow-hidden rounded-xl border border-line"
-                >
-                  <div
-                    className="h-20"
-                    style={{
-                      background: `linear-gradient(90deg, ${item.light} 50%, ${item.dark} 50%)`,
-                    }}
-                  />
-                  <div className="bg-bg p-3">
-                    <p className="text-xs font-medium">{item.name}</p>
-                    <p className="mt-1 font-mono text-[10px] text-muted">
-                      {item.light} / {item.dark}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <Badge>{t("setup.direction")}</Badge>
           </div>
-        </Container>
-      </section>
+
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+            {palette.map((item) => (
+              <div
+                key={item.name}
+                className="overflow-hidden rounded-xl border border-line"
+              >
+                <div
+                  className="h-20"
+                  style={{
+                    background: `linear-gradient(90deg, ${item.light} 50%, ${item.dark} 50%)`,
+                  }}
+                />
+                <div className="bg-bg p-3">
+                  <p className="text-xs font-medium">{item.name}</p>
+                  <p className="mt-1 font-mono text-[10px] text-muted">
+                    {item.light} / {item.dark}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
     </>
   );
 }

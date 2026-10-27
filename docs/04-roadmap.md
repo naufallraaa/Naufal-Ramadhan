@@ -56,7 +56,7 @@ di `design/style-tiles/`, tidak dipakai. Token warna & tipografi di
 
 ---
 
-## Fase 3 — Fondasi ⏳ (hampir selesai)
+## Fase 3 — Fondasi ✅
 
 - [x] Pasang `next-intl` (`routing.ts`, `request.ts`, `navigation.ts`, `proxy.ts`)
 - [x] `messages/id.json` + `messages/en.json`
@@ -65,7 +65,7 @@ di `design/style-tiles/`, tidak dipakai. Token warna & tipografi di
 - [x] `globals.css`: `@theme`, token light/dark, reset dasar
 - [x] Theme toggle tanpa flash (`localStorage` + inline script)
 - [x] Header, footer, locale switcher
-- [ ] Komponen dasar: Container ✅, SectionHeading / Button / Badge menyusul
+- [x] Komponen dasar: Container, Section, SectionHeading, Button/ButtonLink, Badge
 - [x] Skip link + landmark
 
 **Selesai jika:** `/` redirect ke `/id`, `/en` berfungsi, toggle tema persist,
@@ -151,13 +151,14 @@ tidak ada broken link.
 
 ## Status saat ini
 
-| Fase            | Status                                      |
-| --------------- | ------------------------------------------- |
-| 0 — Perencanaan | ✅ selesai                                  |
-| 1 — Scaffold    | ✅ selesai                                  |
-| 2 — Style tiles | ✅ selesai — arah A (Editorial Oxblood)     |
-| 3 — Fondasi     | ⏳ hampir selesai (komponen dasar menyusul) |
-| 4–7             | ⏳ menunggu                                 |
+| Fase            | Status                                  |
+| --------------- | --------------------------------------- |
+| 0 — Perencanaan | ✅ selesai                              |
+| 1 — Scaffold    | ✅ selesai                              |
+| 2 — Style tiles | ✅ selesai — arah A (Editorial Oxblood) |
+| 3 — Fondasi     | ✅ selesai                              |
+| 4 — Homepage    | ⏳ berikutnya (Hero → Contact)          |
+| 5–7             | ⏳ menunggu                             |
 
-**Aksi berikutnya:** selesaikan komponen dasar Fase 3 (`SectionHeading`,
-`Button`, `Badge`), lalu masuk Hero di Fase 4.
+**Aksi berikutnya:** Fase 4 — mulai dari Hero (browser window, noise, glare,
+CTA) sesuai `design/style-tiles/a-editorial.html`.

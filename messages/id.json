@@ -22,7 +22,8 @@
   "setup": {
     "badge": "Fondasi siap",
     "title": "Tech stack sudah terpasang",
-    "description": "Next.js 16, TypeScript, Tailwind v4, next-intl, Zod, dan Bun. Halaman ini masih placeholder — style tile dan section final menyusul.",
+    "description": "Next.js 16, TypeScript, Tailwind v4, next-intl, Zod, dan Bun. Halaman ini masih placeholder — section final menyusul.",
+    "direction": "Arah A · Editorial Oxblood",
     "palette": "Palet inti",
     "localeLabel": "Bahasa aktif",
     "themeLabel": "Tema aktif",

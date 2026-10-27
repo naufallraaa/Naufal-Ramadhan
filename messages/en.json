@@ -22,7 +22,8 @@
   "setup": {
     "badge": "Foundation ready",
     "title": "The tech stack is in place",
-    "description": "Next.js 16, TypeScript, Tailwind v4, next-intl, Zod, and Bun. This page is still a placeholder — style tiles and the final sections come next.",
+    "description": "Next.js 16, TypeScript, Tailwind v4, next-intl, Zod, and Bun. This page is still a placeholder — the final sections come next.",
+    "direction": "Direction A · Editorial Oxblood",
     "palette": "Core palette",
     "localeLabel": "Active locale",
     "themeLabel": "Active theme",
