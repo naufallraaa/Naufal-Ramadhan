@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Naufal Ramadhan — Data & AI",
+    "description": "Naufal Ramadhan's portfolio, focused on data, AI, and software engineering."
+  },
+  "nav": {
+    "work": "Work",
+    "experience": "Experience",
+    "stack": "Stack",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "overline": "Portfolio / 2026",
+    "title": "Turning data into decisions that",
+    "titleAccent": "matter.",
+    "subtitle": "Data & AI enthusiast. Building models, pipelines, and interfaces that make data genuinely useful.",
+    "ctaWork": "View work",
+    "ctaCv": "Download CV",
+    "scroll": "Scroll to explore"
+  },
+  "setup": {
+    "badge": "Foundation ready",
+    "title": "The tech stack is in place",
+    "description": "Next.js 16, TypeScript, Tailwind v4, next-intl, Zod, and Bun. This page is still a placeholder — style tiles and the final sections come next.",
+    "palette": "Core palette",
+    "localeLabel": "Active locale",
+    "themeLabel": "Active theme",
+    "checks": {
+      "framework": "Next.js 16 App Router + Turbopack",
+      "language": "TypeScript strict + ESLint + Prettier",
+      "style": "Tailwind v4 with oxblood tokens",
+      "i18n": "next-intl — /id and /en",
+      "content": "Zod for content validation",
+      "runtime": "Bun 1.4 as the local runtime"
+    }
+  },
+  "footer": {
+    "note": "Made over coffee, two shots, no sugar.",
+    "rights": "All rights reserved."
+  },
+  "a11y": {
+    "toggleTheme": "Toggle theme",
+    "switchLocale": "Switch language",
+    "skipToContent": "Skip to content"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark"
+  }
+}

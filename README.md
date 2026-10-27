@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portofolio — Naufal Ramadhan
 
-## Getting Started
+Portofolio pribadi bilingual (Indonesia / English) dengan fokus data & AI.
+Dibangun dengan Next.js 16 App Router, Tailwind CSS v4, dan next-intl.
 
-First, run the development server:
+> Status: fondasi siap (i18n, tema, layout dasar). Section konten dan halaman
+> detail project menyusul. Lihat [`docs/04-roadmap.md`](./docs/04-roadmap.md).
+
+---
+
+## Stack
+
+| Layer           | Pilihan                               |
+| --------------- | ------------------------------------- |
+| Framework       | Next.js 16.4 (App Router, Turbopack)  |
+| Bahasa          | TypeScript strict                     |
+| Styling         | Tailwind CSS 4.3 (CSS-first `@theme`) |
+| i18n            | next-intl 4.14 — `/id`, `/en`         |
+| Validasi konten | Zod 4                                 |
+| Ikon            | lucide-react                          |
+| Animasi         | motion                                |
+| Package manager | Bun                                   |
+| Deploy          | Vercel                                |
+
+## Menjalankan
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
+bun run dev        # http://localhost:3000 → redirect ke /id
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Script lain:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+bun run build      # production build
+bun run start      # jalankan hasil build
+bun run typecheck  # tsc --noEmit
+bun run lint       # eslint
+bun run format     # prettier --write .
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> Butuh Bun 1.4+. Node.js belum terpasang di mesin pengembangan saat ini,
+> jadi semua script memakai `bun --bun`. Di Vercel, gunakan Build Command
+> `next build` dengan Node bawaan Vercel.
 
-## Learn More
+## Struktur singkat
 
-To learn more about Next.js, take a look at the following resources:
+```text
+docs/                 Dokumen perencanaan & desain
+messages/             String UI per locale (id.json, en.json)
+src/app/[locale]/     Layout + halaman per locale
+src/components/       layout, theme, ui
+src/i18n/             routing, request config, navigation helpers
+src/lib/              utility, theme script, helper build-time
+src/proxy.ts          next-intl middleware (Next 16: proxy, bukan middleware)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Salin `.env.example` → `.env.local`:
 
-## Deploy on Vercel
+```bash
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Dokumentasi
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Dokumen                                                  | Isi                                      |
+| -------------------------------------------------------- | ---------------------------------------- |
+| [`docs/README.md`](./docs/README.md)                     | Index & keputusan yang dikunci           |
+| [`docs/00-brief.md`](./docs/00-brief.md)                 | Tujuan, audiens, scope, kriteria sukses  |
+| [`docs/01-tech-stack.md`](./docs/01-tech-stack.md)       | Stack, arsitektur, routing, deploy       |
+| [`docs/02-design-system.md`](./docs/02-design-system.md) | Palet, tipografi, komponen, motion, a11y |
+| [`docs/03-content-model.md`](./docs/03-content-model.md) | Tipe konten & schema Zod                 |
+| [`docs/04-roadmap.md`](./docs/04-roadmap.md)             | Fase pengerjaan & definition of done     |
+| [`docs/05-references.md`](./docs/05-references.md)       | Analisis referensi & spek style tile     |
+
+## Lisensi
+
+Konten dan identitas pribadi — semua hak dilindungi.

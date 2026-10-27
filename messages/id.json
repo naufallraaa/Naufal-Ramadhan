@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "title": "Naufal Ramadhan — Data & AI",
+    "description": "Portofolio Naufal Ramadhan, berfokus pada data, AI, dan rekayasa perangkat lunak."
+  },
+  "nav": {
+    "work": "Karya",
+    "experience": "Pengalaman",
+    "stack": "Tech Stack",
+    "about": "Tentang",
+    "contact": "Kontak"
+  },
+  "hero": {
+    "overline": "Portofolio / 2026",
+    "title": "Mengubah data menjadi keputusan yang",
+    "titleAccent": "berarti.",
+    "subtitle": "Data & AI enthusiast. Membangun model, pipeline, dan antarmuka yang membuat data benar-benar berguna.",
+    "ctaWork": "Lihat karya",
+    "ctaCv": "Unduh CV",
+    "scroll": "Scroll untuk melihat"
+  },
+  "setup": {
+    "badge": "Fondasi siap",
+    "title": "Tech stack sudah terpasang",
+    "description": "Next.js 16, TypeScript, Tailwind v4, next-intl, Zod, dan Bun. Halaman ini masih placeholder — style tile dan section final menyusul.",
+    "palette": "Palet inti",
+    "localeLabel": "Bahasa aktif",
+    "themeLabel": "Tema aktif",
+    "checks": {
+      "framework": "Next.js 16 App Router + Turbopack",
+      "language": "TypeScript strict + ESLint + Prettier",
+      "style": "Tailwind v4 dengan token oxblood",
+      "i18n": "next-intl — /id dan /en",
+      "content": "Zod untuk validasi konten",
+      "runtime": "Bun 1.4 sebagai runtime lokal"
+    }
+  },
+  "footer": {
+    "note": "Dibuat sambil ngopi, dua shot, tanpa gula.",
+    "rights": "Semua hak dilindungi."
+  },
+  "a11y": {
+    "toggleTheme": "Ganti tema",
+    "switchLocale": "Ganti bahasa",
+    "skipToContent": "Lewati ke konten"
+  },
+  "theme": {
+    "light": "Terang",
+    "dark": "Gelap"
+  }
+}
