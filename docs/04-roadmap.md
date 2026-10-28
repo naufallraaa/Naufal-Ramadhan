@@ -221,21 +221,26 @@ Situs kini punya motion "seperlunya" sesuai prinsip brief:
   - Teks overline `Portofolio / 2026` dan status `Terbuka untuk peluang` dihapus dari hero dan profil.
   - Narasi biodata dibuat lugas & faktual (fresh graduate Widyatama IPK 3.51, fullstack React/Express/Laravel, VPS Linux/Docker/Nginx).
   - Tech stack diperluas: AI-Augmented (Cursor, Copilot, Claude, ChatGPT, Gemini, Hermes), Data Analytics (Python, TensorFlow, OpenCV, Scikit-learn, Pandas, Tableau, Looker Studio), dan Infra (VPS Hosting, Docker, Nginx, VS Code) tanpa Cloudflare.
+- **Integrasi Visual Proyek & Custom Domain Live (28 Okt 2026)**:
+  - Menyambungkan gambar fisik proyek: `skin-cancer.png` (UI Skinia) dan render high-res `heart-disease.png` dari file PDF dashboard Tableau.
+  - Komponen `ProjectCover` di-upgrade: menampilkan foto nyata proyek jika ada file fisiknya, dan otomatis fallback ke gradient oxblood elegan jika belum ada gambar.
+  - URL bilah jendela terminal di hero diperbarui menjadi `naufal-ramadhan.my.id`.
+  - Custom domain `naufal-ramadhan.my.id` berhasil di-deploy, tersambung ke Cloudflare DNS & Vercel edge, dengan sertifikat SSL aktif (HTTP 200).
 - Verifikasi: `bun run typecheck` & `bun run lint` lolos 0 error, build static page 19/19 lulus, respons PDF terverifikasi HTTP 200 (258KB).
 
 ---
 
 ## Fase 7 — Deploy
 
-- [ ] Push ke GitHub
-- [ ] Import ke Vercel
-- [ ] Set Build Command `next build`
-- [ ] Set `NEXT_PUBLIC_SITE_URL`
-- [ ] Cek preview deployment
-- [ ] Smoke test production: `/id`, `/en`, project detail, toggle, switcher
-- [ ] Pasang domain (opsional)
+- [x] Push ke GitHub
+- [x] Import ke Vercel
+- [x] Set Build Command `next build`
+- [x] Set `NEXT_PUBLIC_SITE_URL`
+- [x] Cek preview deployment
+- [x] Smoke test production: `/id`, `/en`, project detail, toggle, switcher
+- [x] Pasang domain (`naufal-ramadhan.my.id` via Cloudflare)
 
-**Selesai jika:** production hijau, semua route 200, tidak ada console error.
+**Selesai jika:** production hijau, semua route 200, tidak ada console error. (LULUS ✅)
 
 ---
 
@@ -262,9 +267,8 @@ Situs kini punya motion "seperlunya" sesuai prinsip brief:
 | 3 — Fondasi     | ✅ selesai                               |
 | 4 — Homepage    | ✅ selesai — verifikasi visual lolos     |
 | 5 — Detail      | ✅ selesai — terverifikasi               |
-| 6 — SEO/a11y     | ✅ selesai — a11y 100, perf 95–99 (lihat catatan) |
-| 6.5 — Animasi    | ✅ selesai — framer-motion + CSS (28 Okt 2026)   |
-| 7 — Deploy       | ⏳ menunggu (git manual oleh Opay)       |
+| 6 — SEO/a11y     | ✅ selesai — a11y 100, perf 95–99       |
+| 6.5 — Animasi    | ✅ selesai — framer-motion + CSS         |
+| 7 — Deploy       | ✅ selesai — live di naufal-ramadhan.my.id |
 
-**Aksi berikutnya:** Fase 7 — deploy (push GitHub → import Vercel →
-`NEXT_PUBLIC_SITE_URL` → smoke test production).
+**Hasil Akhir:** Website portofolio resmi mengudara dan beroperasi penuh.

@@ -1,4 +1,9 @@
+import fs from "node:fs";
+import path from "node:path";
+import Image from "next/image";
+import type { Locale } from "@/i18n/routing";
 import type { Project } from "@/lib/content";
+import { pick } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { Counter } from "@/components/ui/counter";
 
@@ -7,13 +12,46 @@ type ProjectCoverProps = {
   /** Alternates the gradient so stacked covers do not look identical. */
   alternate?: boolean;
   className?: string;
+  locale?: Locale;
 };
 
 export function ProjectCover({
   project,
   alternate = false,
   className,
+  locale = "id",
 }: ProjectCoverProps) {
+  // Check if image file actually exists in public folder
+  const cleanPath = project.cover.replace(/^\//, "");
+  const fullPath = path.join(process.cwd(), "public", cleanPath);
+  const hasImage = fs.existsSync(fullPath);
+
+  if (hasImage) {
+    return (
+      <div
+        className={cn(
+          "relative grid aspect-4/3 w-full overflow-hidden bg-brand-deep",
+          className,
+        )}
+      >
+        <Image
+          src={project.cover}
+          alt={pick(project.title, locale)}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 920px"
+          className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+          priority={project.featured}
+        />
+        {/* Subtle cinematic gradient overlay to preserve contrast and depth */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-40"
+        />
+      </div>
+    );
+  }
+
+  // Graceful editorial gradient fallback when image is not yet available
   return (
     <div
       className={cn(

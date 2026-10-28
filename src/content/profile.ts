@@ -9,7 +9,7 @@ const raw = {
   },
   location: "Indonesia",
   email: "naufalramadhang@gmail.com",
-  site: "naufal.dev",
+  site: "naufal-ramadhan.my.id",
   cv: "/cv-naufal-ramadhan.pdf",
   socials: [
     {

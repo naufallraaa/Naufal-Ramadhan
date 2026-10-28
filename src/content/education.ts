@@ -11,7 +11,6 @@ const raw: Education[] = [
     },
     start: "2022-09",
     end: "2026-08",
-    gpa: "3.51 / 4.00",
     highlights: [
       {
         id: "Fokus pada rekayasa perangkat lunak, arsitektur web modern, dan sistem basis data.",

@@ -30,7 +30,7 @@ const raw: Project[] = [
       { label: { id: "Kelas", en: "Classes" }, value: "7" },
     ],
     links: { repo: "https://github.com/naufallraaa" },
-    cover: "/images/projects/skin-cancer.jpg",
+    cover: "/images/projects/skin-cancer.png",
     featured: true,
     content: [
       {
@@ -147,7 +147,7 @@ const raw: Project[] = [
       { label: { id: "Output", en: "Output" }, value: "Dashboard" },
     ],
     links: { repo: "https://github.com/naufallraaa" },
-    cover: "/images/projects/heart-disease.jpg",
+    cover: "/images/projects/heart-disease.png",
     featured: true,
     content: [
       {

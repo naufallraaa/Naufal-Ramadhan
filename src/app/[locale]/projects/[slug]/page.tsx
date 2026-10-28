@@ -129,7 +129,7 @@ async function ProjectDetail({ params }: ProjectDetailProps) {
         <Reveal delay={0.1}>
           <div className="glare-line relative mt-12 overflow-hidden rounded-[22px] border border-line bg-surface p-1.5">
             <div className="overflow-hidden rounded-2xl">
-              <ProjectCover project={project} />
+              <ProjectCover project={project} locale={locale} />
             </div>
           </div>
         </Reveal>

@@ -36,6 +36,7 @@ export function ProjectCard({
       <ProjectCover
         project={project}
         alternate={alternate}
+        locale={locale}
         className={cn(
           interactive &&
             "transition-transform duration-300 ease-out group-hover:scale-[1.03]",
