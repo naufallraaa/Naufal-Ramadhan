@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { routing } from "@/i18n/routing";
 import { themeScript } from "@/lib/theme";
+import { getSiteUrl } from "@/lib/seo";
 import "../globals.css";
 
 const geist = Geist({
@@ -46,7 +47,7 @@ export async function generateMetadata({
   }
 
   const t = await getTranslations({ locale, namespace: "meta" });
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const siteUrl = getSiteUrl();
 
   return {
     metadataBase: new URL(siteUrl),

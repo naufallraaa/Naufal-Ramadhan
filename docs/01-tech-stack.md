@@ -10,7 +10,7 @@
 | Styling       | Tailwind CSS         | 4.3.3  | Config CSS-first via `@theme`, tanpa `tailwind.config.js` |
 | i18n          | next-intl            | 4.14.9 | Routing locale, metadata, static rendering                |
 | Validasi      | Zod                  | 4.6.7  | Cek data konten saat build                                |
-| Ikon          | lucide-react         | 1.62.0 | Ringan, konsisten                                         |
+| Ikon          | lucide-react         | 1.63.0 | Ringan, konsisten                                         |
 | Animasi       | motion               | 14.7.1 | Hanya micro-interaction & reveal                          |
 | Runtime lokal | Bun                  | 1.4.4  | Sudah tersedia di mesin                                   |
 | Deploy        | Vercel               | —      | Preview per branch, gratis untuk personal                 |
@@ -20,19 +20,22 @@
 Saat ini terpasang:
 
 ```text
-bun 1.4.4
+bun 1.3.10  (.bun\bin)
+node 24.11.1
 git 2.43.0
 ```
 
-Node.js **belum ada**. Next.js secara resmi menargetkan Node ≥ 20.9.
+> Catatan: docs awalnya menulis Bun 1.4.4 tanpa Node. Realitanya sekarang Bun
+> 1.3.10 dan Node 24 sudah terpasang, dan `bun --bun next build` gagal di
+> runtime Bun (modul internal `next-server` tidak bisa dimuat) — jadi fallback
+> Node dipakai sebagai jalur utama build.
 
 **Strategi:**
 
-- Development lokal: `bun --bun next dev` (Bun sebagai runtime).
-- Build lokal: `bun --bun next build`.
-- Build Vercel: `next build` dengan Node bawaan Vercel (bukan `bun --bun`).
-- Jika `bun --bun next build` bermasalah: install Node 24 LTS (Krypton) via
-  `nvm`/`fnm`, tetap pakai Bun untuk install dependency.
+- Development lokal: `bun --bun next dev` (Bun sebagai runtime, masih jalan).
+- Build & start lokal: **Node** — scripts `build`/`start` memanggil
+  `node node_modules/next/dist/bin/next …`.
+- Build Vercel: `next build` dengan Node bawaan Vercel.
 
 ## Setup awal
 
@@ -53,14 +56,19 @@ git init
 ```jsonc
 {
   "scripts": {
-    "dev": "bun --bun next dev",
-    "build": "bun --bun next build",
-    "start": "bun --bun next start",
+    "dev": "node node_modules/next/dist/bin/next dev",
+    "build": "node node_modules/next/dist/bin/next build",
+    "start": "node node_modules/next/dist/bin/next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
   },
 }
 ```
+
+> Dev/build/start semuanya memakai Node: runtime Bun 1.3.10 gagal memuat
+> modul server Next (`next --bun build` error), dan `next dev --bun` bahkan
+> crash saat HMR recompile. Pin langsung ke bin internal `next` juga
+> menyiasati `.bin` shim Unix yang dibuat Bun di Windows.
 
 > Vercel: override Build Command menjadi `next build` di project settings.
 > Biarkan Install Command mengikuti `bun.lock` (Bun install).

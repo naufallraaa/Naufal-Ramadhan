@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Naufal Ramadhan — Data & AI",
-    "description": "Portofolio Naufal Ramadhan, berfokus pada data, AI, dan rekayasa perangkat lunak."
+    "title": "Naufal Ramadhan — Fullstack & AI-Augmented Engineer",
+    "description": "Portofolio Naufal Ramadhan, Fullstack & AI-Augmented Engineer di Indonesia."
   },
   "nav": {
     "work": "Karya",
@@ -14,14 +14,49 @@
     "overline": "Portofolio / 2026",
     "title": "Mengubah data menjadi keputusan yang",
     "titleAccent": "berarti.",
+    "ctaCv": "Lihat CV",
     "ctaWork": "Lihat karya",
     "ctaContact": "Hubungi saya",
     "scroll": "Scroll untuk melihat"
   },
   "sections": {
-    "workLabel": "01 — Karya pilihan",
+    "aboutLabel": "01 — Tentang",
+    "aboutTitle": "Data yang bisa dipakai, bukan cuma rapi di notebook",
+    "experienceLabel": "02 — Pengalaman",
+    "experienceTitle": "Tempat saya bekerja",
+    "experienceDescription": "Peran di data science dan engineering, dengan kecenderungan mengirim hal yang benar-benar dipakai orang.",
+    "workLabel": "03 — Karya pilihan",
     "workTitle": "Yang sedang saya bangun",
-    "workDescription": "Pilihan kecil dari pekerjaan data dan machine learning — dari pelatihan model sampai antarmuka yang membuat hasilnya terpakai."
+    "workDescription": "Pilihan kecil dari pekerjaan data dan machine learning — dari pelatihan model sampai antarmuka yang membuat hasilnya terpakai.",
+    "stackLabel": "04 — Tech stack",
+    "stackTitle": "Perkakas yang saya pakai",
+    "stackDescription": "Dikelompokkan menurut fungsinya, bukan menurut seberapa jago saya mengakuinya.",
+    "educationLabel": "05 — Pendidikan",
+    "educationTitle": "Latar belakang formal",
+    "organizationLabel": "06 — Organisasi",
+    "organizationTitle": "Di luar pekerjaan"
+  },
+  "common": {
+    "present": "Sekarang",
+    "gpa": "IPK"
+  },
+  "project": {
+    "back": "Kembali ke karya",
+    "stackLabel": "Teknologi",
+    "linksLabel": "Tautan",
+    "linksLive": "Kunjungi situs",
+    "linksRepo": "Lihat kode",
+    "linksPaper": "Baca paper",
+    "navLabel": "Navigasi project",
+    "carouselLabel": "Daftar karya — geser untuk melihat",
+    "prev": "Sebelumnya",
+    "next": "Berikutnya",
+    "category": {
+      "data": "Data",
+      "ai": "AI",
+      "web": "Web",
+      "other": "Lainnya"
+    }
   },
   "footer": {
     "contactLabel": "Kontak",
@@ -32,7 +67,9 @@
     "toggleTheme": "Ganti tema",
     "switchLocale": "Ganti bahasa",
     "skipToContent": "Lewati ke konten",
-    "primaryNav": "Navigasi utama"
+    "primaryNav": "Navigasi utama",
+    "openMenu": "Buka menu",
+    "closeMenu": "Tutup menu"
   },
   "theme": {
     "light": "Terang",

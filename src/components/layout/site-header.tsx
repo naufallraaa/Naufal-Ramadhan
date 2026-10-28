@@ -3,15 +3,19 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
 import { LocaleSwitcher } from "./locale-switcher";
+import { MobileNav } from "./mobile-nav";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
 
-const navItems = [
-  { key: "work", href: "/#work" },
-  { key: "contact", href: "/#contact" },
-] as const;
+const navKeys = ["about", "experience", "work", "stack", "contact"] as const;
 
 export async function SiteHeader({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale });
+
+  const items = navKeys.map((key) => ({
+    key,
+    href: `/#${key}`,
+    label: t(`nav.${key}`),
+  }));
 
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg">
@@ -28,13 +32,13 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
           aria-label={t("a11y.primaryNav")}
           className="hidden items-center gap-7 lg:flex"
         >
-          {navItems.map((item) => (
+          {items.map((item) => (
             <Link
               key={item.key}
               href={item.href}
-              className="text-sm text-muted transition-colors hover:text-ink"
+              className="nav-link text-sm text-muted transition-colors hover:text-ink"
             >
-              {t(`nav.${item.key}`)}
+              {item.label}
             </Link>
           ))}
         </nav>
@@ -42,6 +46,12 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
         <div className="flex items-center gap-2">
           <LocaleSwitcher label={t("a11y.switchLocale")} />
           <ThemeToggle label={t("a11y.toggleTheme")} />
+          <MobileNav
+            items={items}
+            label={t("a11y.primaryNav")}
+            openLabel={t("a11y.openMenu")}
+            closeLabel={t("a11y.closeMenu")}
+          />
         </div>
       </Container>
     </header>

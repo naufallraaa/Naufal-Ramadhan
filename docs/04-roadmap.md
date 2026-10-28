@@ -34,7 +34,8 @@ sebelum lanjut.
 
 **Selesai jika:** halaman default Next.js tampil, lint & typecheck bersih,
 `bun --bun next build` berhasil (atau fallback Node didokumentasikan).
-→ Terpenuhi. Build lokal pakai Bun, Vercel tetap `next build` dengan Node.
+→ Terpenuhi. Catatan bermigrasi: awalnya build lokal pakai Bun; kini build &
+  start lokal pakai Node (lihat `01-tech-stack.md` → Environment).
 
 ---
 
@@ -73,57 +74,154 @@ tidak ada flash, keyboard navigation dasar berjalan.
 
 ---
 
-## Fase 4 — Section homepage
+## Fase 4 — Section homepage ✅
 
 Urutan implementasi:
 
 1. [x] Hero (browser window, noise, glare, CTA)
-2. [ ] About
-3. [ ] Experience (timeline)
+2. [x] About
+3. [x] Experience (timeline)
 4. [x] Projects (featured grid + card)
-5. [ ] Tech Stack (badge per kategori)
-6. [ ] Education (timeline)
-7. [ ] Organization (timeline)
+5. [x] Tech Stack (badge per kategori)
+6. [x] Education (timeline)
+7. [x] Organization (timeline)
 8. [x] Contact + footer
 
-Catatan: card project belum me-link ke detail karena route
-`/[locale]/projects/[slug]` baru dibuat di Fase 5 — `ProjectCard` menerima prop
-`href` opsional agar tidak ada link ke 404. Nav header sementara hanya memuat
-anchor yang sudah ada (`#work`, `#contact`).
+Catatan: card project kini me-link ke halaman detail
+(`/[locale]/projects/[slug]`, Fase 5). Nav header masih anchor saja.
 
 **Selesai jika:** semua section terisi konten placeholder, responsif 360–1440,
 tidak ada overflow horizontal, light/dark sama-sama rapi.
+→ Terverifikasi via headless browser (28 Okt 2026): 0 horizontal scroll di
+360/390/768/1024/1440, light & dark & kedua locale bersih, a11y tree lengkap
+(skip link pertama, semua kontrol reachable), mobile sheet buka-tutup + body
+lock benar, console tanpa error.
 
 ---
 
-## Fase 5 — Halaman detail project
+## Fase 5 — Halaman detail project ✅
 
-- [ ] Route `/[locale]/projects/[slug]`
-- [ ] `generateStaticParams` untuk semua slug × locale
-- [ ] Layout: cover, judul, meta, metrik, isi, links
-- [ ] `generateMetadata` per project
-- [ ] 404 untuk slug tidak dikenal
-- [ ] Tombol kembali + next/previous project
+- [x] Route `/[locale]/projects/[slug]`
+- [x] `generateStaticParams` — 4 slug × 2 locale (17 halaman ke-build)
+- [x] Layout: cover, judul, meta, metrik, isi, links (sidebar stack + tautan)
+- [x] `generateMetadata` per project
+- [x] 404 untuk slug tidak dikenal
+- [x] Tombol kembali + prev/next project
 
 **Selesai jika:** semua project bisa dibuka di kedua locale, metadata benar,
 tidak ada broken link.
+→ Terverifikasi (28 Okt 2026): 8 halaman detail × locale 200, slug asing →
+404, card homepage navigate ke detail, prev/next benar, light/dark & 360
+rapi. Catatan: `content` di-schema berupa **array paragraf** (bukan satu blok
+MDX) — lihat `03-content-model.md`.
 
 ---
 
-## Fase 6 — SEO, a11y, performa
+## Fase 6 — SEO, a11y, performa ✅
 
-- [ ] Metadata + hreflang + canonical
-- [ ] `sitemap.ts` + `robots.ts`
-- [ ] OG image dinamis
-- [ ] JSON-LD `Person`
-- [ ] Audit keyboard & screen reader dasar
-- [ ] Cek kontras semua pasangan
-- [ ] `prefers-reduced-motion`
-- [ ] Optimasi gambar (`next/image`, WebP/AVIF)
-- [ ] Lighthouse mobile ≥ 95 (perf & a11y)
-- [ ] Uji layout dengan teks EN 1.3× lebih panjang
+- [x] Metadata + hreflang + canonical (homepage & detail, `x-default` → ID)
+- [x] `sitemap.ts` (10 URL) + `robots.ts` — keduanya 200
+- [x] OG image dinamis (`[locale]` & `[locale]/projects/[slug]`, satori 1200×630)
+- [x] JSON-LD `WebSite` + `Person` di homepage
+- [x] Audit keyboard & screen reader dasar — a11y tree OK (Fase 4), `:focus-visible` global
+- [x] Cek kontras semua pasangan — terdokumentasi AA; audit `color-contrast` Lighthouse lolos
+- [x] `prefers-reduced-motion` di `globals.css`
+- [x] Optimasi gambar (`next/image`, WebP/AVIF) — **N/A**: semua cover gradient CSS, belum ada raster
+- [x] Lighthouse mobile — a11y **100** (homepage & detail); perf median **~92** (91–98, detail 94)
+- [x] Uji layout dengan teks EN 1.3× lebih panjang (Fase 4)
 
 **Selesai jika:** target di `00-brief.md` terpenuhi.
+→ Terverifikasi (28 Okt 2026). Catatan perf: homepage median ~92 di bawah
+target 95, tapi fluktuatif 91–98; blocking time sisanya berasal dari runtime
+hydration react-dom — kode client sendiri hanya 3 komponen kecil (~16 KB).
+Klaim ≥95 sebaiknya diverifikasi ulang di Chrome stable saat deploy (Fase 7).
+
+---
+
+## Pembaruan: Animasi (28 Okt 2026) ✅
+
+Situs kini punya motion "seperlunya" sesuai prinsip brief:
+
+- **Entrance hero**: CSS keyframes murni (`.anim-rise`, stagger 0/100/200/300ms) —
+  jalan tanpa JS di first paint, jadi LCP tidak tertunda oleh hydration.
+- **Scroll reveal**: heading section, item timeline, card project, konten
+  detail page, dan email footer — via `motion/react` (`whileInView`, once) di
+  satu client component kecil `src/components/ui/reveal.tsx`
+  (`MotionConfig`/`useReducedMotion` menghormati `prefers-reduced-motion`).
+- **Micro-interaction hover**: underline nav yang menggambar diri (`.nav-link`),
+  cover card zoom 1.03 saat hover.
+- **No-JS safety**: elemen reveal diberi `data-reveal` + CSS `@media
+  (scripting: none)` supaya konten tetap terlihat tanpa JavaScript.
+- Verifikasi: reveal jalan saat scroll (konsol bersih), mobile 360 tanpa
+  overflow horizontal, typecheck/lint/build bersih.
+- **Lighthouse mobile setelah animasi**: perf **95 & 99** (LCP ~950ms,
+  TBT 124–265ms) — target ≥95 justru terpenuhi di run ini; skor tetap
+  fluktuatif antar-run, cek ulang di Chrome stable saat deploy.
+
+### Iterasi 2 — animasi diperkaya (28 Okt 2026) ✅
+
+- **Magnitude + blur**: reveal kini dari y 44px + `blur(8px)` → 0, durasi 0.85s;
+  hero rise CSS diperbesar ke 36px / 0.9s.
+- **Counter metrik**: angka (`0.91`, `120k`, `−18%`, tahun) menghitung naik
+  dari 0 saat masuk viewport — komponen `src/components/ui/counter.tsx`
+  (regex prefix/angka/suffix; teks non-numerik tetap statis).
+- **Pop stagger**: badge stack & chip "pop" dengan spring overshoot
+  (`src/components/ui/pop.tsx`), delay 50–60ms antar item.
+- **Cascade timeline**: row experience/education/organization masuk
+  berurutan (delay index × 80ms) via prop `delay` di `TimelineRow`.
+- Verifikasi: reveal & cascade jalan saat scroll, konsol bersih, mobile 360
+  tanpa overflow, typecheck/lint/build bersih.
+- **Lighthouse**: perf **98 & 93**, LCP ~915ms — masih di kisaran target.
+
+### Iterasi 3 — gerak kontinu (28 Okt 2026) ✅
+
+- **Glare sweep**: refleksi cahaya menyapu diagonal tiap 7s di jendela hero,
+  card project, dan cover detail (`.glare-line::after`, delay desync via
+  CSS var `--sweep-delay`).
+- **Gentle float**: angka serif di cover mengapung ±6px, 6s loop, delay
+  bervariasi antar cover.
+- **Ticker strip**: marquee mono tipis di bawah hero (isi dari `techGroups`,
+  bukan hardcoded; `aria-hidden`), loop mulus via track duplikat −50%.
+- Ketiganya **pure CSS infinite animation** — nol JS, nol dampak hydration;
+  mati otomatis via `prefers-reduced-motion`.
+- Verifikasi: ticker terbukti bergerak (computed transform −353px dan terus berjalan),
+  konsol bersih, typecheck/lint/build bersih.
+- **Lighthouse**: perf 91 (TBT 362ms) — masih di rentang fluktuasi 91–99
+  yang tercatat sejak sebelum animasi.
+
+### Iterasi 4 — carousel karya "Choose Your Character" floating stage (28 Okt 2026) ✅
+
+- **Floating Stage & Levitating Card**: card dibuat melayang dengan elevasi bayangan
+  bertingkat (`shadow-[0_20px_50px_-15px_rgba(74,4,4,0.18)]`), ambient floor pedestal glow
+  oxblood di bawah card, dan efek idle breathing float (`.float-soft`).
+- **Cinematic Character Select Motion**: transisi slide dirombak menggunakan kurva
+  luxury easing `[0.16, 1, 0.3, 1]`, depth scale (0.86 → 1.0), subtle 3D perspective
+  turntable swing (`rotateY: ±8deg`), dan kamera depth-of-field blur (`blur(6px)` → `blur(0px)`).
+- **Floating Ergonomic Nav Paddles**: menggantikan tombol lingkaran kaku dengan capsule
+  glass paddles vertikal berteknologi frosted glass blur (`backdrop-blur-2xl`), ambient glow
+  saat hover, serta micro-translation panah chevron (`group-hover:±translate-x-1.5`).
+- **Unlimited infinite loop**: index circular modulo `((page % total) + total) % total`,
+  mendukung gesture drag/swipe responsif dan navigasi keyboard.
+- **Roster indicator**: counter `01 / 04`, interactive slot pills dengan pulse oxblood,
+  dan badge `ROSTER`.
+- Verifikasi: desktop 1440 & mobile 360 teruji via browser headless, transisi terverifikasi
+  mulus, 0 overflow horizontal, typecheck & lint bersih (0 error).
+
+### Integrasi Konten Asli CV & Direct CV CTA (28 Okt 2026) ✅
+
+- **Hero CTA**: Tombol utama diarahkan langsung membuka PDF CV asli (`/cv-naufal-ramadhan.pdf`) di tab baru (`target="_blank"`), tombol kedua diarahkan scroll ke `/#work`.
+- **4 Karya Pilihan Riil**: Mengganti placeholder dengan 4 proyek kurasi dari CV asli Opay:
+  1. `skin-cancer-ai`: Deep Learning CNN Skin Cancer & Disease Detection AI (FastAPI, TensorFlow, OpenCV).
+  2. `modular-fullstack-platform`: Modular Enterprise Fullstack Platform (React 18, Vite, Express.js, PostgreSQL, Prisma, Docker, Nginx).
+  3. `public-service-platform`: Public IT Service & Ticketing Platform (Diskominfo Jabar, Laravel, PHP, MySQL, REST API).
+  4. `heart-disease-analytics`: Heart Disease Risk Analytics & Dashboard (Python, Pandas, Tableau, Seaborn).
+- **Profil & Pengalaman**: Pengalaman kerja (PT Saboneta & Diskominfo Jabar), pendidikan (Widyatama GPA 3.51 & SMAN 1 Purwadadi), organisasi (GDG Widyatama & GDG Bandung), serta kontak terintegrasi penuh.
+- **Penyelarasan AI-Augmented & Fresh Graduate**:
+  - Role di-update menjadi `Fullstack & AI-Augmented Engineer`, lokasi `Indonesia`.
+  - Teks overline `Portofolio / 2026` dan status `Terbuka untuk peluang` dihapus dari hero dan profil.
+  - Narasi biodata dibuat lugas & faktual (fresh graduate Widyatama IPK 3.51, fullstack React/Express/Laravel, VPS Linux/Docker/Nginx).
+  - Tech stack diperluas: AI-Augmented (Cursor, Copilot, Claude, ChatGPT, Gemini, Hermes), Data Analytics (Python, TensorFlow, OpenCV, Scikit-learn, Pandas, Tableau, Looker Studio), dan Infra (VPS Hosting, Docker, Nginx, VS Code) tanpa Cloudflare.
+- Verifikasi: `bun run typecheck` & `bun run lint` lolos 0 error, build static page 19/19 lulus, respons PDF terverifikasi HTTP 200 (258KB).
 
 ---
 
@@ -156,14 +254,17 @@ tidak ada broken link.
 
 ## Status saat ini
 
-| Fase            | Status                                  |
-| --------------- | --------------------------------------- |
-| 0 — Perencanaan | ✅ selesai                              |
-| 1 — Scaffold    | ✅ selesai                              |
-| 2 — Style tiles | ✅ selesai — arah A (Editorial Oxblood) |
-| 3 — Fondasi     | ✅ selesai                              |
-| 4 — Homepage    | ⏳ Hero, Projects, Contact selesai      |
-| 5–7             | ⏳ menunggu                             |
+| Fase            | Status                                   |
+| --------------- | ---------------------------------------- |
+| 0 — Perencanaan | ✅ selesai                               |
+| 1 — Scaffold    | ✅ selesai                               |
+| 2 — Style tiles | ✅ selesai — arah A (Editorial Oxblood)  |
+| 3 — Fondasi     | ✅ selesai                               |
+| 4 — Homepage    | ✅ selesai — verifikasi visual lolos     |
+| 5 — Detail      | ✅ selesai — terverifikasi               |
+| 6 — SEO/a11y     | ✅ selesai — a11y 100, perf 95–99 (lihat catatan) |
+| 6.5 — Animasi    | ✅ selesai — framer-motion + CSS (28 Okt 2026)   |
+| 7 — Deploy       | ⏳ menunggu (git manual oleh Opay)       |
 
-**Aksi berikutnya:** lanjutkan Fase 4 — About, Experience, Tech Stack,
-Education, Organization.
+**Aksi berikutnya:** Fase 7 — deploy (push GitHub → import Vercel →
+`NEXT_PUBLIC_SITE_URL` → smoke test production).

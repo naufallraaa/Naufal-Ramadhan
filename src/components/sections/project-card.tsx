@@ -1,9 +1,11 @@
 import { ArrowUpRight } from "lucide-react";
-import type { ReactNode } from "react";
+import type { CSSProperties } from "react";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { pick, type Project } from "@/lib/content";
 import { cn } from "@/lib/utils";
+import { Counter } from "@/components/ui/counter";
+import { ProjectCover } from "./project-cover";
 
 type ProjectCardProps = {
   project: Project;
@@ -12,6 +14,7 @@ type ProjectCardProps = {
   href?: string;
   /** Alternates the cover gradient so stacked cards do not look identical. */
   alternate?: boolean;
+  coverClassName?: string;
 };
 
 export function ProjectCard({
@@ -19,23 +22,26 @@ export function ProjectCard({
   locale,
   href,
   alternate = false,
+  coverClassName,
 }: ProjectCardProps) {
   const interactive = Boolean(href);
 
   const body = (
-    <div className="glare-line relative overflow-hidden rounded-2xl border border-line bg-surface">
-      <div
+    <div
+      className="glare-line relative overflow-hidden rounded-2xl border border-line bg-surface"
+      style={
+        { "--sweep-delay": alternate ? "2.5s" : "0s" } as CSSProperties
+      }
+    >
+      <ProjectCover
+        project={project}
+        alternate={alternate}
         className={cn(
-          "grid aspect-4/3 place-items-center",
-          alternate
-            ? "bg-[radial-gradient(circle_at_70%_30%,rgb(226_106_94/28%),transparent_55%),radial-gradient(circle_at_25%_75%,rgb(107_8_8/95%),transparent_60%),linear-gradient(200deg,#2e0202,#4a0404_60%,#2e0202)]"
-            : "bg-[radial-gradient(circle_at_30%_25%,rgb(226_106_94/35%),transparent_55%),radial-gradient(circle_at_75%_70%,rgb(74_4_4/90%),transparent_60%),linear-gradient(145deg,#2e0202,#4a0404_55%,#6b0808)]",
+          interactive &&
+            "transition-transform duration-300 ease-out group-hover:scale-[1.03]",
+          coverClassName,
         )}
-      >
-        <span className="font-serif text-[clamp(2.25rem,4vw,3.25rem)] text-on-brand/85 italic">
-          {project.metrics?.[0]?.value ?? project.year}
-        </span>
-      </div>
+      />
 
       <div className="border-t border-line p-6">
         <div className="flex items-center justify-between gap-4">
@@ -66,7 +72,7 @@ export function ProjectCard({
                 className="inline-flex items-baseline gap-2 rounded-full border border-line px-3 py-1.5"
               >
                 <b className="text-sm font-medium tabular-nums">
-                  {metric.value}
+                  <Counter text={metric.value} />
                 </b>
                 <span className="text-xs text-muted">
                   {pick(metric.label, locale)}
@@ -80,7 +86,7 @@ export function ProjectCard({
   );
 
   const shell =
-    "block rounded-[22px] border border-line p-1.5 transition-[border-color,transform] duration-200 ease-out";
+    "block rounded-[24px] border border-line/80 bg-surface/50 p-2 shadow-[0_20px_50px_-15px_rgba(74,4,4,0.18),0_10px_25px_-5px_rgba(28,20,20,0.06)] dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7),0_0_40px_-10px_rgba(226,106,94,0.1)] transition-[border-color,box-shadow,transform] duration-300 ease-out";
 
   if (!href) {
     return <article className={shell}>{body}</article>;
@@ -91,14 +97,10 @@ export function ProjectCard({
       href={href}
       className={cn(
         shell,
-        "group hover:-translate-y-0.5 hover:border-brand-text focus-visible:-translate-y-0.5 focus-visible:border-brand-text",
+        "group hover:-translate-y-1 hover:border-brand-text hover:shadow-[0_28px_65px_-12px_rgba(74,4,4,0.25)] dark:hover:shadow-[0_32px_75px_-15px_rgba(0,0,0,0.85)] focus-visible:-translate-y-1 focus-visible:border-brand-text",
       )}
     >
       {body}
     </Link>
   );
-}
-
-export function ProjectGrid({ children }: { children: ReactNode }) {
-  return <div className="grid gap-6 md:grid-cols-2">{children}</div>;
 }

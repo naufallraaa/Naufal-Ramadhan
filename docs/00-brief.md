@@ -52,7 +52,7 @@ Membangun website portofolio pribadi yang:
 
 ## Batasan teknis
 
-- Mesin saat ini hanya punya **Bun 1.4.4**; Node.js belum terpasang.
+- Mesin memakai **Node.js 24 LTS** (dev/build/start) dan **Bun 1.3** (package manager).
 - Repo masih kosong dan belum diinisialisasi sebagai git.
 - Konten asli belum tersedia → semua pakai placeholder.
 - Deploy target Vercel (build di Vercel memakai Node).

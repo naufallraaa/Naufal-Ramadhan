@@ -185,7 +185,10 @@ export type Project = {
   cover: string;
   gallery?: string[];
   featured: boolean;
-  content?: Localized; // long-form, menyusul (MDX)
+  // Diimplementasi sebagai array paragraf (bukan satu blok) supaya render
+  // detail page tidak butuh parser MDX. MDX menyusul kalau long-form butuh
+  // formatting kaya.
+  content?: Localized[];
 };
 ```
 

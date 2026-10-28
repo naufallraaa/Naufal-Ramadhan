@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Naufal Ramadhan — Data & AI",
-    "description": "Naufal Ramadhan's portfolio, focused on data, AI, and software engineering."
+    "title": "Naufal Ramadhan — Fullstack & AI-Augmented Engineer",
+    "description": "Naufal Ramadhan's portfolio, Fullstack & AI-Augmented Engineer based in Indonesia."
   },
   "nav": {
     "work": "Work",
@@ -14,14 +14,49 @@
     "overline": "Portfolio / 2026",
     "title": "Turning data into decisions that",
     "titleAccent": "matter.",
+    "ctaCv": "View CV",
     "ctaWork": "View work",
     "ctaContact": "Get in touch",
     "scroll": "Scroll to explore"
   },
   "sections": {
-    "workLabel": "01 — Selected work",
+    "aboutLabel": "01 — About",
+    "aboutTitle": "Data you can act on, not just tidy notebooks",
+    "experienceLabel": "02 — Experience",
+    "experienceTitle": "Where I've worked",
+    "experienceDescription": "Roles across data science and engineering, with a bias toward shipping things people actually use.",
+    "workLabel": "03 — Selected work",
     "workTitle": "What I've been building",
-    "workDescription": "A short selection of data and machine learning work, from model training to the interfaces that make the output usable."
+    "workDescription": "A short selection of data and machine learning work, from model training to the interfaces that make the output usable.",
+    "stackLabel": "04 — Stack",
+    "stackTitle": "Tools I reach for",
+    "stackDescription": "Grouped by what they do, not by how well I claim to know them.",
+    "educationLabel": "05 — Education",
+    "educationTitle": "Formal background",
+    "organizationLabel": "06 — Organization",
+    "organizationTitle": "Outside of work"
+  },
+  "common": {
+    "present": "Present",
+    "gpa": "GPA"
+  },
+  "project": {
+    "back": "Back to work",
+    "stackLabel": "Stack",
+    "linksLabel": "Links",
+    "linksLive": "Visit site",
+    "linksRepo": "View code",
+    "linksPaper": "Read paper",
+    "navLabel": "Project navigation",
+    "carouselLabel": "Work list — swipe to browse",
+    "prev": "Previous",
+    "next": "Next",
+    "category": {
+      "data": "Data",
+      "ai": "AI",
+      "web": "Web",
+      "other": "Other"
+    }
   },
   "footer": {
     "contactLabel": "Contact",
@@ -32,7 +67,9 @@
     "toggleTheme": "Toggle theme",
     "switchLocale": "Switch language",
     "skipToContent": "Skip to content",
-    "primaryNav": "Primary navigation"
+    "primaryNav": "Primary navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "theme": {
     "light": "Light",
