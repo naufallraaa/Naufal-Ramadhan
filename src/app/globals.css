@@ -206,6 +206,20 @@
     scroll-behavior: smooth;
   }
 
+  html.has-preloader,
+  html.has-preloader body {
+    background-color: #100101 !important;
+    overflow: hidden !important;
+    height: 100% !important;
+  }
+
+  html.has-preloader #main,
+  html.has-preloader header,
+  html.has-preloader footer {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
   body {
     background-color: var(--bg);
     color: var(--ink);

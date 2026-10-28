@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { Container } from "@/components/ui/container";
+import { BrandLink } from "./brand-link";
 import { LocaleSwitcher } from "./locale-switcher";
 import { MobileNav } from "./mobile-nav";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
@@ -20,13 +21,10 @@ export async function SiteHeader({ locale }: { locale: Locale }) {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg">
       <Container className="flex h-16 items-center justify-between gap-4">
-        <Link
-          href="/"
-          className="flex items-baseline gap-2.5 text-[15px] font-medium tracking-[-0.02em] text-ink transition-colors hover:text-brand-text"
-        >
+        <BrandLink className="flex items-baseline gap-2.5 text-[15px] font-medium tracking-[-0.02em] text-ink transition-colors hover:text-brand-text">
           Naufal Ramadhan
           <span className="text-brand-text">/ 01</span>
-        </Link>
+        </BrandLink>
 
         <nav
           aria-label={t("a11y.primaryNav")}

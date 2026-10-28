@@ -6,3 +6,12 @@ export const themeScript = `(() => {
     document.documentElement.style.colorScheme = dark ? "dark" : "light";
   } catch {}
 })();`;
+
+export const preloaderScript = `(() => {
+  try {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.documentElement.classList.remove("has-preloader");
+    }
+  } catch {}
+})();`;
+

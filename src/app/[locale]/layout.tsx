@@ -6,8 +6,9 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { TerminalPreloader } from "@/components/ui/terminal-preloader";
 import { routing } from "@/i18n/routing";
-import { themeScript } from "@/lib/theme";
+import { themeScript, preloaderScript } from "@/lib/theme";
 import { getSiteUrl } from "@/lib/seo";
 import "../globals.css";
 
@@ -88,13 +89,36 @@ export default async function LocaleLayout({
       lang={locale}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
-      className={`${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+      className={`${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} has-preloader`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+html.has-preloader, html.has-preloader body {
+  background-color: #100101 !important;
+  overflow: hidden !important;
+  height: 100% !important;
+}
+html.has-preloader #main,
+html.has-preloader header,
+html.has-preloader footer {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+`,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: themeScript + "\n" + preloaderScript,
+          }}
+        />
       </head>
       <body className="flex min-h-dvh flex-col bg-bg text-ink antialiased">
         <NextIntlClientProvider>
+          <TerminalPreloader />
           <a
             href="#main"
             className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-lg focus:bg-brand focus:px-4 focus:py-2 focus:text-sm focus:text-on-brand"
