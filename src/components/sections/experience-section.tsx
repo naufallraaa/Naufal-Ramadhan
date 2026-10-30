@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { TechIcon } from "@/components/ui/tech-icon";
 import { experiences } from "@/content";
 import type { Locale } from "@/i18n/routing";
 import { pick } from "@/lib/content";
@@ -27,7 +28,12 @@ export async function ExperienceSection({ locale }: { locale: Locale }) {
           <TimelineRow
             key={item.id}
             delay={index * 0.08}
-            period={formatPeriod(item.start, item.end, locale, t("common.present"))}
+            period={formatPeriod(
+              item.start,
+              item.end,
+              locale,
+              t("common.present"),
+            )}
             title={pick(item.role, locale)}
             subtitle={[item.company, item.location].filter(Boolean).join(" · ")}
           >
@@ -49,7 +55,8 @@ export async function ExperienceSection({ locale }: { locale: Locale }) {
             <div className="mt-4 flex flex-wrap gap-1.5">
               {item.stack.map((tech) => (
                 <Badge key={tech} className="px-2.5 py-1 text-[11px]">
-                  {tech}
+                  <TechIcon name={tech} className="size-3" />
+                  <span>{tech}</span>
                 </Badge>
               ))}
             </div>
